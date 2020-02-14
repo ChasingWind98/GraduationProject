@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
+    <children>
+        <AnchorPane id="anchorLeft" layoutX="36.0" layoutY="25.0" opacity="0.7" prefHeight="200.0" prefWidth="239.0" style="-fx-background-color: #9AC0CD;">
+            <children>
+                <Button fx:id="fxmlButton" layoutX="59.0" layoutY="146.0" onAction="#fxmlAction" prefHeight="40.0" prefWidth="117.0" text="我是按钮">
+
+                </Button>
+            <TextField id="textField" layoutX="39.0" layoutY="73.0" promptText="placehode提示信息">
+               <tooltip>
+                  <Tooltip text="提示信息" />
+               </tooltip>
+            </TextField>
+            </children>
+        </AnchorPane>
+        <AnchorPane id="anchorRight" layoutX="320.0" layoutY="19.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6495ED;" />
+    </children>
+</AnchorPane>
