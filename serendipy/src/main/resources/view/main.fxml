@@ -1,24 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
     <children>
-        <AnchorPane id="anchorLeft" layoutX="36.0" layoutY="25.0" opacity="0.7" prefHeight="200.0" prefWidth="239.0" style="-fx-background-color: #9AC0CD;">
-            <children>
-                <Button fx:id="fxmlButton" layoutX="59.0" layoutY="146.0" onAction="#fxmlAction" prefHeight="40.0" prefWidth="117.0" text="我是按钮">
-
-                </Button>
-            <TextField id="textField" layoutX="39.0" layoutY="73.0" promptText="placehode提示信息">
-               <tooltip>
-                  <Tooltip text="提示信息" />
-               </tooltip>
-            </TextField>
-            </children>
-        </AnchorPane>
-        <AnchorPane id="anchorRight" layoutX="320.0" layoutY="19.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6495ED;" />
+      <MenuBar fx:id="menu" prefHeight="29.0" prefWidth="920.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="文件">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="编辑">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="关于">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane fx:id="mainPane" layoutX="-2.0" layoutY="29.0" prefHeight="680.0" prefWidth="918.0">
+         <left>
+            <VBox fx:id="leftBox" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #E0FFFF#E0FFFF;" BorderPane.alignment="CENTER">
+               <children>
+                  <TilePane id="imageType" prefHeight="200.0" prefWidth="95.0" style="-fx-background-color: #FFF5EE;">
+                     <children>
+                        <Button fx:id="cubeButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="42.0">
+                           <graphic>
+                              <ImageView id="cubeImg" fitHeight="20.0" fitWidth="38.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/cube.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <TilePane.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </TilePane.margin>
+                        </Button>
+                        <Button fx:id="ballButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="39.0">
+                           <graphic>
+                              <ImageView id="ballImg" fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/ball.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <TilePane.margin>
+                              <Insets top="10.0" />
+                           </TilePane.margin>
+                        </Button>
+                        <Button fx:id="cylinderButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="26.0">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/cylinder.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <TilePane.margin>
+                              <Insets left="10.0" />
+                           </TilePane.margin>
+                        </Button>
+                        <Button fx:id="coneButton" mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/cone.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </TilePane>
+                  <TilePane id="selectColor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F0FFF0;">
+                     <children>
+                        <ColorPicker editable="true">
+                           <TilePane.margin>
+                              <Insets />
+                           </TilePane.margin>
+                        </ColorPicker>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TilePane>
+               </children>
+            </VBox>
+         </left>
+         <bottom>
+            <HBox fx:id="bottomBox" alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="915.0" style="-fx-background-color: #CDCD00#CDCD00;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label id="statusInfo" fx:id="locationInfo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="49.0" prefWidth="99.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+         <center>
+            <Group fx:id="canvasGroup" BorderPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="canvas" height="200.0" onMouseMoved="#showInfo" width="200.0" />
+               </children>
+            </Group>
+         </center>
+      </BorderPane>
     </children>
 </AnchorPane>

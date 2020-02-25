@@ -1,42 +1,57 @@
 package edu.ahnu.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import lombok.Data;
 
-
+@Data
 public class MainController {
 
-    //注册组件
+    //图形控件
     @FXML
-    private Button fxmlButton;
-
-    @FXML
-    private AnchorPane anchorLeft;
+    private Button cubeButton;
 
     @FXML
-    private AnchorPane anchorRight;
+    private Button ballButton;
 
     @FXML
-    private TextField textField;
+    private Button cylinderButton;
 
-    //无参构造
-    public MainController(){
+    @FXML
+    private Button coneButton;
 
+
+    @FXML
+    private Canvas canvas;
+
+    @FXML
+    private Label locationInfo;
+
+
+
+    //布局区域
+    @FXML
+    private MenuBar menu;
+
+    @FXML
+    private VBox leftBox;
+
+    @FXML
+    private HBox bottomBox;
+
+    @FXML
+    private BorderPane mainPane;
+
+    @FXML
+    void showInfo(MouseEvent event) {
+        locationInfo.setText(event.getX() + ", " + event.getY() + " px");
     }
-
-    @FXML
-    public void initialize(){
-        System.out.println("初始化");
-    }
-
-    //注册按钮的单击事件对应的方法
-    @FXML
-    private void fxmlAction(){
-        System.out.println("单击事件");
-    }
-
-
 
 }
