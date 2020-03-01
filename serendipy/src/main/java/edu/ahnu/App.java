@@ -2,13 +2,18 @@ package edu.ahnu;
 
 import edu.ahnu.controller.MainController;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.EventListener;
 
 public class App extends Application {
 
@@ -29,22 +34,36 @@ public class App extends Application {
         fxmlLoader.setLocation(url);
 
         //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        BorderPane root = (BorderPane) fxmlLoader.load();
 
         //main.fxml对应的Controller
         fxmlLoader.getRoot();
-        MainController mainController = fxmlLoader.getController();
+        final MainController mainController = fxmlLoader.getController();
+
+        mainController.getCenterBox().heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mainController.getDrawingCanvas().setHeight(newValue.doubleValue());
+            }
+        });
+        mainController.getCenterBox().widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mainController.getDrawingCanvas().setWidth(newValue.doubleValue());
+            }
+        });
 
 
-        //用于绑定页面 自适应页面
-        mainController.getMenu().prefWidthProperty().bind(root.widthProperty());
-        mainController.getMainPane().prefHeightProperty().bind(root.heightProperty());
-        mainController.getMainPane().prefWidthProperty().bind(root.widthProperty());
-        mainController.getLeftBox().prefHeightProperty().bind(root.heightProperty());
 
 
 
-        Scene scene = new Scene(root);
+
+
+
+        //开启3D渲染
+        Scene scene = new Scene(root,1000, 800, true);
+
+        scene.setCamera(new PerspectiveCamera());
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("三维图形绘制");
@@ -52,6 +71,8 @@ public class App extends Application {
 
 
         primaryStage.show();
+
+
 
     }
 }
