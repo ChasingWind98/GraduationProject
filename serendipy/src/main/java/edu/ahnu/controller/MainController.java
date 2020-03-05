@@ -1,5 +1,8 @@
 package edu.ahnu.controller;
 
+import edu.ahnu.service.MainService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +19,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import lombok.Data;
+import lombok.Value;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +28,8 @@ import java.util.ResourceBundle;
 
 @Data
 public class MainController implements Initializable {
+
+    final MainService service = new MainService();
 
     //页面上的图形按钮
     @FXML
@@ -83,6 +89,21 @@ public class MainController implements Initializable {
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //页面自适应
+        centerBox.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                drawingCanvas.setHeight(newValue.doubleValue());
+            }
+        });
+
+        centerBox.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                drawingCanvas.setWidth(newValue.doubleValue());
+            }
+        });
+        //设置颜色选择器的初始颜色
         colorPicker.setValue(Color.BLACK);
     }
 
@@ -98,6 +119,7 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+
 
     }
 
@@ -165,8 +187,6 @@ public class MainController implements Initializable {
 
 
 
-
-
     //底部状态栏 显示当前鼠标所在的位置信息
     @FXML
     void setMouseExit(MouseEvent event) {
@@ -177,6 +197,7 @@ public class MainController implements Initializable {
     void setMouseLocation(MouseEvent event) {
         bottomLabel.setText(String.format("%.1f, %.1fpx ", event.getX(), event.getY()));
     }
+
 
 
 }
