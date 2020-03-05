@@ -1,5 +1,6 @@
 package edu.ahnu;
 
+import com.jogamp.opengl.GLCapabilities;
 import edu.ahnu.controller.MainController;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -60,6 +61,7 @@ public class App extends Application {
 
 
 
+
         //开启3D渲染
         Scene scene = new Scene(root,1000, 800, true);
 
@@ -71,8 +73,6 @@ public class App extends Application {
 
 
         primaryStage.show();
-
-
 
     }
 }

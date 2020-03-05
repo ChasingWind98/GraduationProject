@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
    <top>
@@ -50,7 +49,7 @@
    <left>
       <AnchorPane prefHeight="654.0" prefWidth="104.0" style="-fx-background-color: #CAE1FF#CAE1FF;" BorderPane.alignment="CENTER">
          <children>
-            <FlowPane hgap="10.0" prefHeight="254.0" prefWidth="139.0" vgap="10.0">
+            <FlowPane hgap="10.0" prefHeight="207.0" prefWidth="144.0" vgap="10.0">
                <children>
                   <Button fx:id="cubeButton" mnemonicParsing="false" onAction="#createCube">
                      <graphic>
@@ -64,7 +63,7 @@
                         <Insets left="10.0" top="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="cuboidButton" mnemonicParsing="false">
+                  <Button fx:id="cuboidButton" mnemonicParsing="false" onAction="#createCuboid">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,7 +75,7 @@
                         <Insets top="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="ballButton" mnemonicParsing="false">
+                  <Button fx:id="ballButton" mnemonicParsing="false" onAction="#createBall">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -88,7 +87,7 @@
                         <Insets left="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="cylinderButton" mnemonicParsing="false">
+                  <Button fx:id="cylinderButton" mnemonicParsing="false" onAction="#createCylinder">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -97,7 +96,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="prismButton" mnemonicParsing="false">
+                  <Button fx:id="prismButton" mnemonicParsing="false" onAction="#createPrism">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -109,7 +108,7 @@
                         <Insets left="10.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button fx:id="coneButton" mnemonicParsing="false">
+                  <Button fx:id="coneButton" mnemonicParsing="false" onAction="#createCone">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,20 +117,23 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <ColorPicker fx:id="colorPicker">
+                     <FlowPane.margin>
+                        <Insets left="12.0" />
+                     </FlowPane.margin>
+                  </ColorPicker>
+                  <Line endX="87.29287719726562" endY="0.2928932309150696" startX="-56.0" />
                </children>
             </FlowPane>
-            <Line endX="87.0" layoutX="55.0" layoutY="254.0" startX="-56.0" />
-            <ColorPicker layoutX="14.0" layoutY="483.0" />
-            <Line endX="77.99998474121094" endY="3.0517578125E-5" layoutX="63.0" layoutY="456.0" startX="-61.99998474121094" startY="3.0517578125E-5" />
-            <Text layoutX="21.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="平移旋转缩放镜像错切" wrappingWidth="66.60836029052734" />
-            <AnchorPane fx:id="testPane" layoutX="1.0" layoutY="256.0" prefHeight="199.0" prefWidth="141.0" />
+            <AnchorPane fx:id="toolPane" layoutX="1.0" layoutY="236.0" prefHeight="417.0" prefWidth="141.0" />
+            <Label layoutX="42.0" layoutY="218.0" text="功能区" />
          </children>
       </AnchorPane>
    </left>
    <center>
       <VBox fx:id="centerBox" prefHeight="654.0" prefWidth="666.0" style="-fx-background-color: #F0FFF0#F0FFF0;" BorderPane.alignment="CENTER">
          <children>
-            <Group>
+            <Group fx:id="group">
                <children>
                   <Canvas fx:id="drawingCanvas" height="650.0" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" width="665.0" />
                </children>

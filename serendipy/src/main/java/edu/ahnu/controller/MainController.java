@@ -1,26 +1,29 @@
 package edu.ahnu.controller;
 
-import edu.ahnu.controller.module.Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import lombok.Data;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 
 @Data
-public class MainController {
+public class MainController implements Initializable {
 
     //页面上的图形按钮
     @FXML
@@ -40,6 +43,9 @@ public class MainController {
 
     @FXML
     private Button coneButton;
+
+    @FXML
+    private ColorPicker colorPicker;
 
 
     //布局区域
@@ -65,23 +71,103 @@ public class MainController {
     @FXML
     private Canvas drawingCanvas;
 
-
-    //测试区域
     @FXML
-    private AnchorPane testPane;
+    private Group group;
 
 
+    //工具区域
     @FXML
-    void createCube(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/test.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        testPane.getChildren().add(root);
+    private AnchorPane toolPane;
+
+
+    //初始化
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colorPicker.setValue(Color.BLACK);
     }
 
 
+    //正方体
+    @FXML
+    void createCube(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        //添加功能区
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/cubeMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+
+    }
+
+    //长方体
+    @FXML
+    void createCuboid(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/cuboidMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+    }
+
+    //球体
+    @FXML
+    void createBall(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/ballMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+    }
+
+    //圆柱体
+    @FXML
+    void createCylinder(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/cylinderMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+    }
+
+    //棱柱
+    @FXML
+    void createPrism(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/prismMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+    }
+
+
+    //圆锥
+    @FXML
+    void createCone(ActionEvent event) throws IOException {
+        toolPane.getChildren().clear();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/coneMenu.fxml");
+        fxmlLoader.setLocation(url);
+        //获取加载的根结点
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        toolPane.getChildren().add(root);
+    }
+
+
+
+
+
+
+    //底部状态栏 显示当前鼠标所在的位置信息
     @FXML
     void setMouseExit(MouseEvent event) {
         bottomLabel.setText("");
@@ -91,5 +177,6 @@ public class MainController {
     void setMouseLocation(MouseEvent event) {
         bottomLabel.setText(String.format("%.1f, %.1fpx ", event.getX(), event.getY()));
     }
+
 
 }

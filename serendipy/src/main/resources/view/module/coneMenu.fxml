@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="463.0" prefWidth="141.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.module.ConeController">
+
+    <children>
+        <Label layoutX="7.0" layoutY="100.0" prefHeight="20.0" prefWidth="39.0" text="平移" textAlignment="CENTER"/>
+        <TextField layoutX="48.0" layoutY="120.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴"/>
+        <TextField layoutX="48.0" layoutY="189.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴"/>
+        <TextField layoutX="48.0" layoutY="154.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴"/>
+        <Label layoutX="7.0" layoutY="335.0" prefHeight="32.0" prefWidth="39.0" text="缩放" textAlignment="CENTER"/>
+        <ProgressBar layoutX="16.0" layoutY="375.0" prefHeight="20.0" prefWidth="116.0" progress="0.24"/>
+        <Label layoutX="7.0" layoutY="228.0" prefHeight="20.0" prefWidth="39.0" text="旋转" textAlignment="CENTER"/>
+        <Label layoutX="7.0" layoutY="395.0" prefHeight="32.0" prefWidth="39.0" text="错切" textAlignment="CENTER"/>
+        <TextField layoutX="48.0" layoutY="242.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴"/>
+        <TextField layoutX="48.0" layoutY="308.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴"/>
+        <TextField layoutX="48.0" layoutY="275.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴"/>
+        <TextField layoutX="10.0" layoutY="427.0" prefHeight="27.0" prefWidth="127.0" text="待补充"/>
+        <TextField layoutX="66.0" layoutY="9.0" prefHeight="27.0" prefWidth="52.0" promptText="长"/>
+        <TextField layoutX="66.0" layoutY="42.0" prefHeight="27.0" prefWidth="52.0" promptText="高"/>
+        <Label layoutX="8.0" layoutY="14.0" text="底面半径"/>
+        <Label layoutX="28.0" layoutY="47.0" text="高"/>
+    </children>
+
+</AnchorPane>

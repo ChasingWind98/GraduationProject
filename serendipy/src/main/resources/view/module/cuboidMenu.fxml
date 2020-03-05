@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="463.0" prefWidth="141.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.module.CuboidController">
+
+    <children>
+        <Label layoutX="7.0" layoutY="100.0" prefHeight="20.0" prefWidth="39.0" text="平移" textAlignment="CENTER"/>
+        <TextField layoutX="48.0" layoutY="120.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴"/>
+        <TextField layoutX="48.0" layoutY="189.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴"/>
+        <TextField layoutX="48.0" layoutY="154.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴"/>
+        <Label layoutX="7.0" layoutY="335.0" prefHeight="32.0" prefWidth="39.0" text="缩放" textAlignment="CENTER"/>
+        <ProgressBar layoutX="16.0" layoutY="375.0" prefHeight="20.0" prefWidth="116.0" progress="0.24"/>
+        <Label layoutX="7.0" layoutY="228.0" prefHeight="20.0" prefWidth="39.0" text="旋转" textAlignment="CENTER"/>
+        <Label layoutX="7.0" layoutY="395.0" prefHeight="32.0" prefWidth="39.0" text="错切" textAlignment="CENTER"/>
+        <TextField layoutX="48.0" layoutY="242.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴"/>
+        <TextField layoutX="48.0" layoutY="308.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴"/>
+        <TextField layoutX="48.0" layoutY="275.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴"/>
+        <TextField layoutX="10.0" layoutY="427.0" prefHeight="27.0" prefWidth="127.0" text="待补充"/>
+        <TextField layoutX="48.0" layoutY="7.0" prefHeight="27.0" prefWidth="74.0" promptText="长"/>
+        <TextField layoutX="48.0" layoutY="73.0" prefHeight="27.0" prefWidth="74.0" promptText="高"/>
+        <TextField layoutX="48.0" layoutY="41.0" prefHeight="27.0" prefWidth="74.0" promptText="宽"/>
+        <Label layoutX="12.0" layoutY="12.0" text="长"/>
+        <Label layoutX="12.0" layoutY="46.0" text="宽"/>
+        <Label layoutX="12.0" layoutY="78.0" text="高"/>
+    </children>
+
+</AnchorPane>
