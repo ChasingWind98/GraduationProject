@@ -31,14 +31,15 @@ public class App extends Application {
 
         //开启3D渲染
         Scene scene = new Scene(root,1000, 800, true);
-        //添加相机
+        //添加相机  透视相机
         scene.setCamera(new PerspectiveCamera());
+
+
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("三维图形绘制");
         primaryStage.getIcons().add(new Image("/image/icon.png"));
 
         primaryStage.show();
-
     }
 }

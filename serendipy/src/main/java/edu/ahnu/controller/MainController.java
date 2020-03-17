@@ -1,25 +1,17 @@
 package edu.ahnu.controller;
 
+import edu.ahnu.controller.module.*;
 import edu.ahnu.service.MainService;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
+import javafx.scene.DepthTest;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,11 +45,14 @@ public class MainController implements Initializable {
     @FXML
     private ColorPicker colorPicker;
 
+    @FXML
+    private MenuItem clearButton;
+
 
     //布局区域
 
     @FXML
-    private Menu menuBar;
+    private MenuBar menuBar;
 
     @FXML
     private AnchorPane bottomPane;
@@ -66,19 +61,10 @@ public class MainController implements Initializable {
     private Label bottomLabel;
 
     @FXML
-    private FlowPane leftPane;
+    private AnchorPane leftPane;
 
     @FXML
-    private AnchorPane mainPane;
-
-    @FXML
-    private VBox centerBox;
-
-    @FXML
-    private Canvas drawingCanvas;
-
-    @FXML
-    private Group group;
+    private AnchorPane centerPane;
 
 
     //工具区域
@@ -89,22 +75,13 @@ public class MainController implements Initializable {
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //页面自适应
-        centerBox.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                drawingCanvas.setHeight(newValue.doubleValue());
-            }
-        });
 
-        centerBox.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                drawingCanvas.setWidth(newValue.doubleValue());
-            }
-        });
         //设置颜色选择器的初始颜色
         colorPicker.setValue(Color.BLACK);
+
+        centerPane.setDepthTest(DepthTest.DISABLE);
+        leftPane.setDepthTest(DepthTest.DISABLE);
+        menuBar.setDepthTest(DepthTest.DISABLE);
     }
 
 
@@ -120,6 +97,9 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
 
+        CubeController cubeController = (CubeController)fxmlLoader.getController();
+        //画正方体
+        cubeController.drawCube(centerPane);
 
     }
 
@@ -133,6 +113,9 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+        //画
+        CuboidController cuboidController = (CuboidController)fxmlLoader.getController();
+        cuboidController.drawCuboid(centerPane);
     }
 
     //球体
@@ -145,6 +128,9 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+
+        BallController ballController = (BallController)fxmlLoader.getController();
+        ballController.drawBall(centerPane);
     }
 
     //圆柱体
@@ -157,6 +143,9 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+
+        CylinderController cylinderController = (CylinderController)fxmlLoader.getController();
+        cylinderController.drawCylinder(centerPane);
     }
 
     //棱柱
@@ -169,6 +158,9 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+
+        //获取控制器
+        PrismController prismController = fxmlLoader.getController();
     }
 
 
@@ -182,9 +174,11 @@ public class MainController implements Initializable {
         //获取加载的根结点
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
+
+        //获取控制器
+        ConeController coneController = fxmlLoader.getController();
+
     }
-
-
 
 
     //底部状态栏 显示当前鼠标所在的位置信息
@@ -199,5 +193,10 @@ public class MainController implements Initializable {
     }
 
 
+    //清除centerPane的内容
+    @FXML
+    void cleanAll(ActionEvent event) {
+        centerPane.getChildren().clear();
+    }
 
 }

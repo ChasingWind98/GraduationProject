@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="文件">
             <items>
@@ -31,9 +27,9 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu fx:id="menuBar" mnemonicParsing="false" text="关于">
+          <Menu fx:id="clearMenu" mnemonicParsing="false" text="清除画板">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="clearButton" mnemonicParsing="false" onAction="#cleanAll" text="清除" />
             </items>
           </Menu>
         </menus>
@@ -46,99 +42,74 @@
          </children>
       </AnchorPane>
    </bottom>
+   <center>
+      <AnchorPane fx:id="centerPane" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0FFFF#E0FFFF00;" BorderPane.alignment="CENTER" />
+   </center>
    <left>
-      <AnchorPane prefHeight="654.0" prefWidth="104.0" style="-fx-background-color: #CAE1FF#CAE1FF;" BorderPane.alignment="CENTER">
-         <children>
-            <FlowPane hgap="10.0" prefHeight="207.0" prefWidth="144.0" vgap="10.0">
+      <ScrollPane prefHeight="654.0" prefWidth="168.0" style="-fx-background-color: #C6E2FF#C6E2FF;" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="leftPane" prefHeight="633.0" prefWidth="168.0">
                <children>
-                  <Button fx:id="cubeButton" mnemonicParsing="false" onAction="#createCube">
+                  <Button fx:id="cubeButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCube" prefHeight="41.0" prefWidth="46.0">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/cube.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <FlowPane.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </FlowPane.margin>
                   </Button>
-                  <Button fx:id="cuboidButton" mnemonicParsing="false" onAction="#createCuboid">
+                  <Button fx:id="prismButton" layoutX="84.0" layoutY="138.0" mnemonicParsing="false" onAction="#createPrism" prefHeight="39.0" prefWidth="38.0">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cuboid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <FlowPane.margin>
-                        <Insets top="10.0" />
-                     </FlowPane.margin>
-                  </Button>
-                  <Button fx:id="ballButton" mnemonicParsing="false" onAction="#createBall">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/ball.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <FlowPane.margin>
-                        <Insets left="10.0" />
-                     </FlowPane.margin>
-                  </Button>
-                  <Button fx:id="cylinderButton" mnemonicParsing="false" onAction="#createCylinder">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cylinder.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="prismButton" mnemonicParsing="false" onAction="#createPrism">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/prism.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <FlowPane.margin>
-                        <Insets left="10.0" />
-                     </FlowPane.margin>
                   </Button>
-                  <Button fx:id="coneButton" mnemonicParsing="false" onAction="#createCone">
+                  <Button fx:id="coneButton" layoutX="18.0" layoutY="138.0" mnemonicParsing="false" onAction="#createCone" prefHeight="39.0" prefWidth="38.0">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/cone.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <ColorPicker fx:id="colorPicker">
-                     <FlowPane.margin>
-                        <Insets left="12.0" />
-                     </FlowPane.margin>
-                  </ColorPicker>
-                  <Line endX="87.29287719726562" endY="0.2928932309150696" startX="-56.0" />
+                  <Button fx:id="cylinderButton" layoutX="84.0" layoutY="74.0" mnemonicParsing="false" onAction="#createCylinder" prefHeight="39.0" prefWidth="38.0">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/cylinder.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ballButton" layoutX="18.0" layoutY="74.0" mnemonicParsing="false" onAction="#createBall" prefHeight="39.0" prefWidth="38.0">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/ball.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="cuboidButton" layoutX="84.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCuboid" prefHeight="39.0" prefWidth="38.0">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/cuboid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
+                  <AnchorPane fx:id="toolPane" layoutX="14.0" layoutY="253.0" prefHeight="380.0" prefWidth="140.0" />
+                  <ColorPicker fx:id="colorPicker" layoutX="30.0" layoutY="208.0" />
                </children>
-            </FlowPane>
-            <AnchorPane fx:id="toolPane" layoutX="1.0" layoutY="236.0" prefHeight="417.0" prefWidth="141.0" />
-            <Label layoutX="42.0" layoutY="218.0" text="功能区" />
-         </children>
-      </AnchorPane>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </left>
-   <center>
-      <VBox fx:id="centerBox" prefHeight="654.0" prefWidth="666.0" style="-fx-background-color: #F0FFF0#F0FFF0;" BorderPane.alignment="CENTER">
-         <children>
-            <Group fx:id="group">
-               <children>
-                  <Canvas fx:id="drawingCanvas" height="650.0" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" width="665.0" />
-               </children>
-            </Group>
-         </children>
-      </VBox>
-   </center>
 </BorderPane>
