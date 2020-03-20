@@ -2,11 +2,16 @@ package edu.ahnu.controller;
 
 import edu.ahnu.controller.module.*;
 import edu.ahnu.service.MainService;
+import edu.ahnu.util.DragUtil;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.DepthTest;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +27,8 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     final MainService service = new MainService();
+
+    ObservableMap<String, Node> map;
 
     //页面上的图形按钮
     @FXML
@@ -71,6 +78,9 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane toolPane;
 
+    @FXML
+    private Button chooseButton;
+
 
     //初始化
     @Override
@@ -79,9 +89,7 @@ public class MainController implements Initializable {
         //设置颜色选择器的初始颜色
         colorPicker.setValue(Color.BLACK);
 
-        centerPane.setDepthTest(DepthTest.DISABLE);
-        leftPane.setDepthTest(DepthTest.DISABLE);
-        menuBar.setDepthTest(DepthTest.DISABLE);
+
     }
 
 
@@ -97,7 +105,7 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
 
-        CubeController cubeController = (CubeController)fxmlLoader.getController();
+        CubeController cubeController = (CubeController) fxmlLoader.getController();
         //画正方体
         cubeController.drawCube(centerPane);
 
@@ -114,7 +122,7 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
         //画
-        CuboidController cuboidController = (CuboidController)fxmlLoader.getController();
+        CuboidController cuboidController = (CuboidController) fxmlLoader.getController();
         cuboidController.drawCuboid(centerPane);
     }
 
@@ -129,7 +137,7 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
 
-        BallController ballController = (BallController)fxmlLoader.getController();
+        BallController ballController = (BallController) fxmlLoader.getController();
         ballController.drawBall(centerPane);
     }
 
@@ -144,7 +152,7 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         toolPane.getChildren().add(root);
 
-        CylinderController cylinderController = (CylinderController)fxmlLoader.getController();
+        CylinderController cylinderController = (CylinderController) fxmlLoader.getController();
         cylinderController.drawCylinder(centerPane);
     }
 
@@ -199,4 +207,17 @@ public class MainController implements Initializable {
         centerPane.getChildren().clear();
     }
 
+
+    //选择按钮
+    @FXML
+    void chooseNode(ActionEvent event) {
+        //移除centerPane的EventHandler
+        centerPane.setOnMousePressed(null);
+        centerPane.setOnMouseDragged(null);
+        centerPane.setOnMouseReleased(null);
+        //添加拖拽
+        for (Node node : centerPane.getChildren()) {
+            DragUtil.draggable(node);
+        }
+    }
 }

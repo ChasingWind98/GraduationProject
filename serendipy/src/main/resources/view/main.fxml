@@ -43,7 +43,7 @@
       </AnchorPane>
    </bottom>
    <center>
-      <AnchorPane fx:id="centerPane" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0FFFF#E0FFFF00;" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="centerPane" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFAFA#FFFAFA00#F0FFFF#F0FFFF00;" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <ScrollPane prefHeight="654.0" prefWidth="168.0" style="-fx-background-color: #C6E2FF#C6E2FF;" BorderPane.alignment="CENTER">
@@ -106,7 +106,16 @@
                   </Button>
                   <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
                   <AnchorPane fx:id="toolPane" layoutX="14.0" layoutY="253.0" prefHeight="380.0" prefWidth="140.0" />
-                  <ColorPicker fx:id="colorPicker" layoutX="30.0" layoutY="208.0" />
+                  <ColorPicker fx:id="colorPicker" layoutX="14.0" layoutY="208.0" prefHeight="27.0" prefWidth="84.0" />
+                  <Button fx:id="chooseButton" layoutX="111.0" layoutY="208.0" mnemonicParsing="false" onAction="#chooseNode" prefHeight="27.0" prefWidth="30.0">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/chooser.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

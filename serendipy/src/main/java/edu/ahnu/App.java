@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -29,8 +30,8 @@ public class App extends Application {
         //获取加载的根结点
         BorderPane root = (BorderPane) fxmlLoader.load();
 
-        //开启3D渲染
-        Scene scene = new Scene(root,1000, 800, true);
+        //开启3D渲染 以及抗锯齿
+        Scene scene = new Scene(root,1000, 800, false, SceneAntialiasing.BALANCED);
         //添加相机  透视相机
         scene.setCamera(new PerspectiveCamera());
 
