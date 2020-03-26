@@ -1,14 +1,18 @@
 package edu.ahnu.controller.module;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
+import lombok.Data;
 
-import javax.swing.event.DocumentEvent;
-
+@Data
 public class BallController {
     private double startX;
     private double startY;
@@ -25,22 +29,37 @@ public class BallController {
     //球
     private Sphere sphere;
 
+    private PhongMaterial material;
+
+
+    //flag用于判断鼠标释放之前的状态
+    int flag = 0;
+
 
     @FXML
     private TextField radiusText;
 
-    public void drawBall(final Pane pane) {
+    public void drawBall(final Pane pane, ColorPicker colorPicker) {
         pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                flag = 1;
+
                 startX = event.getX();
                 startY = event.getY();
+
+                //创建材质
+                Color value = colorPicker.valueProperty().getValue();
+                material = new PhongMaterial();
+                material.setDiffuseColor(value);
             }
         });
 
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+
+                flag = 2;
 
                 //移除之前的球体
                 pane.getChildren().remove(sphere);
@@ -50,19 +69,22 @@ public class BallController {
                 endLengthY = event.getY() - startY;
                 currentRadius = Math.sqrt(endLengthX * endLengthX + endLengthY * endLengthY) / 2;
 
-                if (currentRadius <= 0) {
+                //绘制的时候显示的数据
+                /*if (currentRadius <= 0) {
                     radiusText.setText("0.0");
                 } else {
-
                     radiusText.setText(String.format("%.1f", currentRadius));
-                }
+                    //radiusText.textProperty().bindBidirectional(new SimpleStringProperty(String.valueOf(currentRadius)));
 
+                }
+*/
                 sphere = new Sphere(currentRadius);
                 //设置位置
                 sphere.setLayoutX(startX);
                 sphere.setLayoutY(startY);
 
                 pane.getChildren().add(sphere);
+                sphere.setMaterial(material);
             }
         });
 
@@ -70,7 +92,21 @@ public class BallController {
         pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //TODO 存储最终的形状 防止在Drag的时候删除了之前的
+
+                if (flag == 2 && endLengthX >= 0 && endLengthY >= 0) {
+                    flag = 1;
+                    pane.getChildren().remove(sphere);
+                    Sphere sphereEnd = new Sphere(currentRadius);
+
+                    sphereEnd.setLayoutX(startX);
+                    sphereEnd.setLayoutY(startY);
+
+                    //设置id
+                    sphereEnd.setId("ball");
+
+                    pane.getChildren().add(sphereEnd);
+                    sphereEnd.setMaterial(material);
+                }
             }
         });
 

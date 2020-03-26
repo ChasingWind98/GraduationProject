@@ -1,13 +1,9 @@
 package edu.ahnu.controller;
 
 import edu.ahnu.controller.module.*;
-import edu.ahnu.service.MainService;
-import edu.ahnu.util.DragUtil;
-import javafx.collections.ObservableList;
+import edu.ahnu.util.DragAndChangeUtil;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import lombok.Data;
 
 import java.io.IOException;
@@ -26,7 +21,6 @@ import java.util.ResourceBundle;
 @Data
 public class MainController implements Initializable {
 
-    final MainService service = new MainService();
 
     ObservableMap<String, Node> map;
 
@@ -82,14 +76,11 @@ public class MainController implements Initializable {
     private Button chooseButton;
 
 
+
+
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //设置颜色选择器的初始颜色
-        colorPicker.setValue(Color.BLACK);
-
-
     }
 
 
@@ -97,94 +88,44 @@ public class MainController implements Initializable {
     @FXML
     void createCube(ActionEvent event) throws IOException {
         toolPane.getChildren().clear();
-        //添加功能区
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/cubeMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
-
-        CubeController cubeController = (CubeController) fxmlLoader.getController();
+        CubeController cubeController = new CubeController();
         //画正方体
-        cubeController.drawCube(centerPane);
-
+        cubeController.drawCube(centerPane, colorPicker);
     }
 
     //长方体
     @FXML
     void createCuboid(ActionEvent event) throws IOException {
-        toolPane.getChildren().clear();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/cuboidMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
-        //画
-        CuboidController cuboidController = (CuboidController) fxmlLoader.getController();
-        cuboidController.drawCuboid(centerPane);
+
+       CuboidController cuboidController = new CuboidController();
+        cuboidController.drawCuboid(centerPane, colorPicker);
     }
 
     //球体
     @FXML
     void createBall(ActionEvent event) throws IOException {
-        toolPane.getChildren().clear();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/ballMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
 
-        BallController ballController = (BallController) fxmlLoader.getController();
-        ballController.drawBall(centerPane);
+
+       BallController ballController = new BallController();
+        ballController.drawBall(centerPane, colorPicker);
     }
 
     //圆柱体
     @FXML
     void createCylinder(ActionEvent event) throws IOException {
-        toolPane.getChildren().clear();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/cylinderMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
 
-        CylinderController cylinderController = (CylinderController) fxmlLoader.getController();
-        cylinderController.drawCylinder(centerPane);
-    }
-
-    //棱柱
-    @FXML
-    void createPrism(ActionEvent event) throws IOException {
-        toolPane.getChildren().clear();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/prismMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
-
-        //获取控制器
-        PrismController prismController = fxmlLoader.getController();
+       CylinderController cylinderController = new CylinderController();
+        cylinderController.drawCylinder(centerPane, colorPicker);
     }
 
 
-    //圆锥
-    @FXML
-    void createCone(ActionEvent event) throws IOException {
-        toolPane.getChildren().clear();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/coneMenu.fxml");
-        fxmlLoader.setLocation(url);
-        //获取加载的根结点
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-        toolPane.getChildren().add(root);
 
-        //获取控制器
-        ConeController coneController = fxmlLoader.getController();
+    //四棱锥
+    @FXML
+    void createPyramid(ActionEvent event) throws IOException {
+
+        PyramidController pyramidController = new PyramidController();
+        pyramidController.drawPyramid(centerPane, colorPicker);
 
     }
 
@@ -208,16 +149,31 @@ public class MainController implements Initializable {
     }
 
 
-    //选择按钮
+    //选择按钮 实现拖拽的功能
     @FXML
-    void chooseNode(ActionEvent event) {
-        //移除centerPane的EventHandler
+    void chooseNode(ActionEvent event) throws IOException {
+        //移除centerPane中的EventHandler
         centerPane.setOnMousePressed(null);
         centerPane.setOnMouseDragged(null);
         centerPane.setOnMouseReleased(null);
-        //添加拖拽
+        //添加拖拽 以及变换功能
         for (Node node : centerPane.getChildren()) {
-            DragUtil.draggable(node);
+            DragAndChangeUtil.draggable(node);
+            DragAndChangeUtil.changeable(node);
+
+
+            toolPane.getChildren().clear();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            URL url = fxmlLoader.getClassLoader().getResource("view/tools.fxml");
+            fxmlLoader.setLocation(url);
+            AnchorPane root = (AnchorPane) fxmlLoader.load();
+            toolPane.getChildren().add(root);
+
+            ToolsController toolsController = fxmlLoader.getController();
+            toolsController.showTools(node, toolPane);
+
         }
     }
+
+
 }

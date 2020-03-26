@@ -1,15 +1,15 @@
 package edu.ahnu.controller.module;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
-import javafx.scene.shape.Rectangle;
+import lombok.Data;
 
+@Data
 public class CuboidController {
     private double startX;
     private double startY;
@@ -21,6 +21,11 @@ public class CuboidController {
 
     private Box box;
 
+    private PhongMaterial material;
+
+    //flag用于判断鼠标释放之前的状态
+    int flag = 0;
+
     @FXML
     private TextField lengthText;
 
@@ -31,53 +36,68 @@ public class CuboidController {
     private TextField heightText;
 
 
-    public void drawCuboid(final Pane pane){
-        pane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                startX = event.getX();
-                startY = event.getY();
-            }
+    public void drawCuboid(final Pane pane, ColorPicker colorPicker){
+        pane.setOnMousePressed(event -> {
+
+            flag = 1;
+
+            startX = event.getX();
+            startY = event.getY();
+
+            //创建材质
+            Color value = colorPicker.valueProperty().getValue();
+            material = new PhongMaterial();
+            material.setDiffuseColor(value);
         });
 
 
-        pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+        pane.setOnMouseDragged(event -> {
+
+            flag = 2;
+
+            pane.getChildren().remove(box);
+
+            endLengthX = event.getX() - startX;
+            endLengthY = event.getY() - startY;
+
+            //绘制的时候显示的数据
+           /* if (endLengthX <= 0 || endLengthY <= 0){
+                lengthText.setText("0.0");
+                widthText.setText("0.0");
+                heightText.setText("0.0");
+            }else {
+                lengthText.setText(String.format("%.1f", endLengthX));
+                widthText.setText(String.format("%.1f", endLengthY));
+                heightText.setText(String.format("%.1f", endLengthY));
+
+            }*/
+
+            box = new Box(endLengthX, endLengthY, endLengthX);
+            //设置边框颜色以及填充透明
+
+            //设置位置
+            box.setLayoutX(startX);
+            box.setLayoutY(startY);
+
+            pane.getChildren().add(box);
+            box.setMaterial(material);
+
+        });
+
+        pane.setOnMouseReleased(event -> {
+
+            if (flag == 2 && endLengthX >= 0 && endLengthY >= 0) {
+                flag = 1;
 
                 pane.getChildren().remove(box);
 
-                endLengthX = event.getX() - startX;
-                endLengthY = event.getY() - startY;
+                Box boxEnd = new Box(endLengthX, endLengthY, endLengthX);
+                boxEnd.setId("cuboid");
 
-                if (endLengthX <= 0 || endLengthY <= 0){
-                    lengthText.setText("0.0");
-                    widthText.setText("0.0");
-                    heightText.setText("0.0");
-                }else {
-                    lengthText.setText(String.format("%.1f", endLengthX));
-                    widthText.setText(String.format("%.1f", endLengthY));
-                    heightText.setText(String.format("%.1f", endLengthY));
-
-                }
-
-                box = new Box(endLengthX, endLengthY, endLengthX);
-                //设置边框颜色以及填充透明
-
-                //设置位置
-                box.setLayoutX(startX);
-                box.setLayoutY(startY);
-
-                pane.getChildren().add(box);
-
-            }
-        });
-
-        pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                //TODO 存储最终的形状 防止在Drag的时候删除了之前的
-
+                boxEnd.setLayoutX(startX);
+                boxEnd.setLayoutY(startY);
+                pane.getChildren().add(boxEnd);
+                boxEnd.setMaterial(material);
             }
         });
 

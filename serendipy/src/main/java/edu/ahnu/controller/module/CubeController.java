@@ -2,12 +2,21 @@ package edu.ahnu.controller.module;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
+import lombok.Data;
 
+import javax.tools.Tool;
 
+@Data
 public class CubeController {
 
     private double startX;
@@ -17,6 +26,9 @@ public class CubeController {
 
     private Box box;
 
+    private PhongMaterial material;
+
+
     @FXML
     private TextField lengthText;
 
@@ -24,67 +36,59 @@ public class CubeController {
     //flag用于判断鼠标释放之前的状态
     int flag = 0;
 
-    public void drawCube(final Pane pane) {
+    public void drawCube(final Pane pane, ColorPicker colorPicker) {
 
-        pane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+
+        pane.setOnMousePressed(event -> {
+            flag = 1;
+            startX = event.getX();
+            startY = event.getY();
+
+            //创建材质
+            Color value = colorPicker.valueProperty().getValue();
+            material = new PhongMaterial();
+            material.setDiffuseColor(value);
+        });
+
+
+        pane.setOnMouseDragged(event -> {
+
+
+            flag = 2;
+            pane.getChildren().remove(box);
+            endX = event.getX() - startX;
+
+
+            //绘制的时候显示数据
+
+            box = new Box(endX, endX, endX);
+
+            box.setLayoutX(startX);
+            box.setLayoutY(startY);
+
+            pane.getChildren().add(box);
+            box.setMaterial(material);
+        });
+
+
+        pane.setOnMouseReleased(event -> {
+            if (flag == 2 && endX >= 0) {
                 flag = 1;
-                startX = event.getX();
-                startY = event.getY();
-            }
-        });
-
-
-        pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-
-                flag = 2;
                 pane.getChildren().remove(box);
-                endX = event.getX() - startX;
 
-                if (endX <= 0) {
-                    lengthText.setText("0.0");
-                } else {
+                final Box boxEnd = new Box(endX, endX, endX);
+                boxEnd.setId("cube");
 
-                    lengthText.setText(String.format("%.1f", endX));
-                }
+                //设置位置 以及材质
 
+                boxEnd.setLayoutX(startX);
+                boxEnd.setLayoutY(startY);
 
-                box = new Box(endX, endX, endX);
-
-                //TODO Materia材质设置颜色 ColorPicker
-
-                box.setLayoutX(startX);
-                box.setLayoutY(startY);
-
-                pane.getChildren().add(box);
-            }
-
-
-        });
-
-
-        pane.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (flag == 2 && endX >= 0) {
-                    flag = 1;
-                    pane.getChildren().remove(box);
-
-                    final Box boxEnd = new Box(endX, endX, endX);
-
-                    //设置位置
-                    boxEnd.setLayoutX(startX);
-                    boxEnd.setLayoutY(startY);
-
-                    pane.getChildren().add(boxEnd);
-
-                }
+                pane.getChildren().add(boxEnd);
+                boxEnd.setMaterial(material);
 
             }
+
         });
 
     }

@@ -1,12 +1,26 @@
 package edu.ahnu;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
- * Unit test for simple App.
+ *
+ * @author blj0011
  */
-public class AppTest {
+public class AppTest extends Application
+{
+    @Override
+    public void start(Stage primaryStage)
+    {
 
+
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
 }

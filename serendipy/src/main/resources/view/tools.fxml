@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="695.0" prefWidth="141.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.ToolsController">
+
+
+    <children>
+        <Label layoutX="7.0" layoutY="28.0" prefHeight="20.0" prefWidth="28.0" text="平移" textAlignment="CENTER" />
+        <TextField fx:id="translationX" layoutX="37.0" layoutY="25.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴" />
+        <TextField fx:id="translationZ" layoutX="37.0" layoutY="95.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴" />
+        <TextField fx:id="translationY" layoutX="37.0" layoutY="60.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴" />
+        <Label layoutX="7.0" layoutY="247.0" prefHeight="32.0" prefWidth="32.0" text="缩放" textAlignment="CENTER" />
+        <Label layoutX="7.0" layoutY="138.0" prefHeight="20.0" prefWidth="29.0" text="旋转" textAlignment="CENTER" />
+        <Label layoutX="2.0" layoutY="408.0" prefHeight="32.0" prefWidth="39.0" text="镜像" textAlignment="CENTER" />
+        <TextField fx:id="rotateX" layoutX="37.0" layoutY="135.0" prefHeight="27.0" prefWidth="74.0" promptText="x轴" />
+        <TextField fx:id="rotateZ" layoutX="37.0" layoutY="207.0" prefHeight="27.0" prefWidth="74.0" promptText="z轴" />
+        <TextField fx:id="rotateY" layoutX="37.0" layoutY="171.0" prefHeight="27.0" prefWidth="74.0" promptText="y轴" />
+      <Slider fx:id="scaleX" layoutX="47.0" layoutY="282.0" majorTickUnit="5.0" max="10.0" min="1.0" minorTickCount="4" prefHeight="28.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Label layoutX="20.0" layoutY="281.0" text="X轴" />
+      <Label layoutX="19.0" layoutY="325.0" text="Y轴" />
+      <Label layoutX="17.0" layoutY="369.0" text="Z轴" />
+      <Slider fx:id="scaleY" layoutX="47.0" layoutY="322.0" majorTickUnit="5.0" max="10.0" min="1.0" minorTickCount="4" prefHeight="28.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Slider fx:id="scaleZ" layoutX="47.0" layoutY="368.0" majorTickUnit="5.0" max="10.0" min="1.0" minorTickCount="4" prefHeight="28.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" value="1.0" />
+      <Label layoutX="1.0" layoutY="543.0" text="错切" />
+      <Slider fx:id="shearX" blockIncrement="0.1" layoutX="34.0" layoutY="565.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="4" prefHeight="28.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" />
+      <Label layoutX="6.0" layoutY="569.0" text="X轴" />
+      <Slider fx:id="shearY" blockIncrement="0.1" layoutX="34.0" layoutY="610.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="4" prefHeight="28.0" prefWidth="86.0" showTickLabels="true" showTickMarks="true" />
+      <Label layoutX="7.0" layoutY="616.0" text="Y轴" />
+      <Label layoutX="11.0" layoutY="445.0" text="水平镜像" />
+      <Label layoutX="13.0" layoutY="493.0" text="垂直镜像" />
+      <ImageView fx:id="mirrorXimg" fitHeight="23.0" fitWidth="38.0" layoutX="79.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/close.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mirrorYimg" fitHeight="23.0" fitWidth="38.0" layoutX="81.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/close.png" />
+         </image>
+      </ImageView>
+    </children>
+
+
+</AnchorPane>

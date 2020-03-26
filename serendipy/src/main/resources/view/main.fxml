@@ -59,20 +59,11 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="prismButton" layoutX="84.0" layoutY="138.0" mnemonicParsing="false" onAction="#createPrism" prefHeight="39.0" prefWidth="38.0">
+                  <Button fx:id="coneButton" layoutX="18.0" layoutY="138.0" mnemonicParsing="false" onAction="#createPyramid" prefHeight="39.0" prefWidth="38.0">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/prism.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="coneButton" layoutX="18.0" layoutY="138.0" mnemonicParsing="false" onAction="#createCone" prefHeight="39.0" prefWidth="38.0">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cone.png" />
+                              <Image url="@../image/pyramid.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -106,10 +97,10 @@
                   </Button>
                   <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
                   <AnchorPane fx:id="toolPane" layoutX="14.0" layoutY="253.0" prefHeight="380.0" prefWidth="140.0" />
-                  <ColorPicker fx:id="colorPicker" layoutX="14.0" layoutY="208.0" prefHeight="27.0" prefWidth="84.0" />
-                  <Button fx:id="chooseButton" layoutX="111.0" layoutY="208.0" mnemonicParsing="false" onAction="#chooseNode" prefHeight="27.0" prefWidth="30.0">
+                  <ColorPicker fx:id="colorPicker" layoutX="18.0" layoutY="205.0" prefHeight="27.0" prefWidth="111.0" />
+                  <Button fx:id="chooseButton" layoutX="84.0" layoutY="138.0" mnemonicParsing="false" onAction="#chooseNode" prefHeight="39.0" prefWidth="38.0">
                      <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/chooser.png" />
                            </image>
