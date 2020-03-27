@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
    <top>
       <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -50,63 +51,85 @@
          <content>
             <AnchorPane fx:id="leftPane" prefHeight="633.0" prefWidth="168.0">
                <children>
-                  <Button fx:id="cubeButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCube" prefHeight="41.0" prefWidth="46.0">
+                  <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
+                  <AnchorPane fx:id="toolPane" layoutX="14.0" layoutY="253.0" prefHeight="380.0" prefWidth="140.0" />
+                  <JFXButton fx:id="cubeButton" buttonType="RAISED" layoutX="10.0" layoutY="14.0" onAction="#createCube" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/cube.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
-                  <Button fx:id="coneButton" layoutX="18.0" layoutY="138.0" mnemonicParsing="false" onAction="#createPyramid" prefHeight="39.0" prefWidth="38.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="cuboidButton" buttonType="RAISED" layoutX="74.0" layoutY="14.0" onAction="#createCuboid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/pyramid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="cylinderButton" layoutX="84.0" layoutY="74.0" mnemonicParsing="false" onAction="#createCylinder" prefHeight="39.0" prefWidth="38.0">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cylinder.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="ballButton" layoutX="18.0" layoutY="74.0" mnemonicParsing="false" onAction="#createBall" prefHeight="39.0" prefWidth="38.0">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/ball.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="cuboidButton" layoutX="84.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCuboid" prefHeight="39.0" prefWidth="38.0">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/cuboid.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
-                  <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
-                  <AnchorPane fx:id="toolPane" layoutX="14.0" layoutY="253.0" prefHeight="380.0" prefWidth="140.0" />
-                  <ColorPicker fx:id="colorPicker" layoutX="18.0" layoutY="205.0" prefHeight="27.0" prefWidth="111.0" />
-                  <Button fx:id="chooseButton" layoutX="84.0" layoutY="138.0" mnemonicParsing="false" onAction="#chooseNode" prefHeight="39.0" prefWidth="38.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="ballButton" buttonType="RAISED" layoutX="10.0" layoutY="73.0" onAction="#createBall" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/ball.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="cylinderButton" buttonType="RAISED" layoutX="74.0" layoutY="73.0" onAction="#createCylinder" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/cylinder.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="pyramidButton" buttonType="RAISED" layoutX="10.0" layoutY="135.0" onAction="#createPyramid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/pyramid.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="chooseButton" buttonType="RAISED" layoutX="74.0" layoutY="135.0" onAction="#chooseNode" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0ee849">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/chooser.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXColorPicker fx:id="colorPicker" layoutX="27.0" layoutY="197.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXColorPicker>
                </children>
             </AnchorPane>
          </content>

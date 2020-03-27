@@ -1,23 +1,22 @@
 package edu.ahnu.controller;
 
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Shear;
+import javafx.scene.transform.Transform;
 import lombok.Data;
-import lombok.SneakyThrows;
+import org.apache.commons.beanutils.BeanUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,45 +48,45 @@ public class ToolsController {
     
 
     @FXML
-    private TextField translationX;
+    private JFXTextField translationX;
 
     @FXML
-    private TextField translationY;
+    private JFXTextField translationY;
 
     @FXML
-    private TextField translationZ;
+    private JFXTextField translationZ;
     
     @FXML
-    private TextField rotateX;
+    private JFXTextField rotateX;
     
     @FXML
-    private TextField rotateY;
+    private JFXTextField rotateY;
     
     @FXML
-    private TextField rotateZ;
+    private JFXTextField rotateZ;
 
 
     @FXML
-    private Slider scaleX;
+    private JFXSlider scaleX;
 
     @FXML
-    private Slider scaleY;
+    private JFXSlider scaleY;
 
     @FXML
-    private Slider scaleZ;
+    private JFXSlider scaleZ;
 
     @FXML
-    private Slider shearX;
+    private JFXSlider shearX;
 
     @FXML
-    private Slider shearY;
+    private JFXSlider shearY;
 
 
     @FXML
-    private ImageView mirrorXimg;
+    private JFXToggleButton mirrorXBtn;
 
     @FXML
-    private ImageView mirrorYimg;
+    private JFXToggleButton mirrorYBtn;
 
 
     /**
@@ -95,23 +94,19 @@ public class ToolsController {
      *
      * @param node
      */
-    public void showTools(Node node, Pane toolPane) {
-        node.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @SneakyThrows
-            @Override
-            public void handle(MouseEvent event) {
-                //平移
-                translation(node);
-                //旋转  TODO 在当前的基础上再次进行旋转
-                rotate(node);
-                //缩放
-                scale(node);
-                //镜像
-                mirror(node);
-                //错切
-                shear(node);
+    public void showTools(Node node, Pane centerPane) {
+        node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //平移
+            translation(node);
+            //旋转  TODO 在当前的基础上再次进行旋转
+            rotate(node);
+            //缩放
+            scale(node);
+            //镜像
+            mirror(node, centerPane);
+            //错切
+            shear(node);
 
-            }
         });
 
 
@@ -124,77 +119,59 @@ public class ToolsController {
      */
     private void translation(Node node) {
 
-        translationX.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        translationX.textProperty().addListener((observable, oldValue, newValue) -> {
 
-                if (!regex(newValue)) {
-                    translationX.setText(oldValue);
-                }
+            if (judgeNum(newValue)) {
+                translationX.setText(oldValue);
+            }
 
+        });
+
+
+        translationX.setOnAction(event -> {
+
+            //初始位置
+            if (!translationX.getText().isEmpty()) {
+                currentTranslationX = currentTranslationX + Double.parseDouble(translationX.getText());
+                node.setTranslateX(currentTranslationX);
+            }
+
+        });
+
+        translationY.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (judgeNum(newValue)) {
+                translationY.setText(oldValue);
             }
         });
 
 
-        translationX.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        translationY.setOnAction(event -> {
 
-                //初始位置
-                if (!translationX.getText().isEmpty()) {
-                    currentTranslationX = currentTranslationX + Double.valueOf(translationX.getText());
-                    node.setTranslateX(currentTranslationX);
-                }
-
+            if (!translationY.getText().isEmpty()) {
+                currentTranslationY = currentTranslationY + Double.parseDouble(translationY.getText());
+                node.setTranslateY(currentTranslationY);
             }
+
+
         });
 
-        translationY.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (!regex(newValue)) {
-                    translationY.setText(oldValue);
-                }
+        translationZ.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (judgeNum(newValue)) {
+                translationZ.setText(oldValue);
             }
         });
 
 
-        translationY.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        translationZ.setOnAction(event -> {
 
-                if (!translationY.getText().isEmpty()) {
-                    currentTranslationY = currentTranslationY + Double.valueOf(translationY.getText());
-                    node.setTranslateY(currentTranslationY);
-                }
-
-
+            if (!translationZ.getText().isEmpty()) {
+                currentTranslationZ = currentTranslationZ + Double.parseDouble(translationZ.getText());
+                node.setTranslateZ(currentTranslationZ);
             }
-        });
 
-
-        translationZ.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
-                if (!regex(newValue)) {
-                    translationZ.setText(oldValue);
-                }
-            }
-        });
-
-
-        translationZ.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                if (!translationZ.getText().isEmpty()) {
-                    currentTranslationZ = currentTranslationZ + Double.valueOf(translationZ.getText());
-                    node.setTranslateZ(currentTranslationZ);
-                }
-
-            }
         });
 
 
@@ -206,67 +183,58 @@ public class ToolsController {
      * @param node
      */
     private void rotate(Node node) {
-        rotateX.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!regex(newValue)) {
-                    rotateX.setText(oldValue);
-                }
+
+        rotateX.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (judgeNum(newValue)) {
+                rotateX.setText(oldValue);
             }
         });
         
-        rotateX.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (!rotateX.getText().isEmpty()){
-                    currentRotateX = currentRotateX + Double.valueOf(rotateX.getText());
-                    node.setRotationAxis(Rotate.X_AXIS);
-                    node.setRotate(currentRotateX);
-                }
+        rotateX.setOnAction(event -> {
+            if (!rotateX.getText().isEmpty()){
+
+                currentRotateX = currentRotateX + Double.parseDouble(rotateX.getText());
+
+                node.setRotationAxis(Rotate.X_AXIS);
+                node.setRotate(currentRotateX);
+
             }
         });
         
         
-        rotateY.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!regex(newValue)) {
-                    rotateY.setText(oldValue);
-                }
+        rotateY.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (judgeNum(newValue)) {
+                rotateY.setText(oldValue);
             }
         });
         
-        rotateY.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (!rotateY.getText().isEmpty()){
-                    currentRotateY = currentRotateY + Double.valueOf(rotateY.getText());
-                    node.setRotationAxis(Rotate.Y_AXIS);
-                    node.setRotate(currentRotateY);
-                }
+        rotateY.setOnAction(event -> {
+            if (!rotateY.getText().isEmpty()){
+                currentRotateY = currentRotateY + Double.parseDouble(rotateY.getText());
+                node.setRotationAxis(Rotate.Y_AXIS);
+                node.setRotate(currentRotateY);
+
+
             }
         });
 
 
-        rotateZ.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!regex(newValue)) {
-                    rotateZ.setText(oldValue);
-                }
+        rotateZ.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (judgeNum(newValue)) {
+                rotateZ.setText(oldValue);
             }
         });
 
-        rotateZ.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (!rotateZ.getText().isEmpty()){
-                    currentRotateZ = currentRotateZ + Double.valueOf(rotateZ.getText());
-                    node.setRotationAxis(Rotate.Z_AXIS);
-                    node.setRotate(currentRotateZ);
-                }
+        rotateZ.setOnAction(event -> {
+            if (!rotateZ.getText().isEmpty()){
+                currentRotateZ = currentRotateZ + Double.parseDouble(rotateZ.getText());
+                node.setRotationAxis(Rotate.Z_AXIS);
+                node.setRotate(currentRotateZ);
+
+
             }
         });
+
     }
 
     /**
@@ -275,101 +243,116 @@ public class ToolsController {
      * @param node
      */
     private void scale(Node node) {
-       scaleX.valueProperty().addListener(new ChangeListener<Number>() {
-           @Override
-           public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-               node.setScaleX(newValue.doubleValue());
-           }
-       });
+       scaleX.valueProperty().addListener((observable, oldValue, newValue) -> node.setScaleX(newValue.doubleValue()));
 
-        scaleY.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                node.setScaleY(newValue.doubleValue());
-            }
-        });
+        scaleY.valueProperty().addListener((observable, oldValue, newValue) -> node.setScaleY(newValue.doubleValue()));
 
 
-        scaleZ.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                node.setScaleZ(newValue.doubleValue());
-            }
-        });
+        scaleZ.valueProperty().addListener((observable, oldValue, newValue) -> node.setScaleZ(newValue.doubleValue()));
 
     }
 
     //节点镜像变换
-    private void mirror(Node node) {
-        mirrorXimg.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    private void mirror(Node node, Pane centerPane) {
+
+        //水平镜像
+        mirrorXBtn.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            Node mirrorXNode = null;
             @Override
-            public void handle(MouseEvent event) {
-                if (flagX == 0){
-                    flagX = 1;
-                    //关 --->  开
-                    mirrorXimg.setImage(new Image("/image/open.png"));
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue.equals(true)){
+                    try {
+                        mirrorXNode = (Node) BeanUtils.cloneBean(node);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    }
+                    ObservableList<Transform> transforms = node.getTransforms();
+                    mirrorXNode.getTransforms().addAll(transforms);
+                    centerPane.getChildren().add(mirrorXNode);
+
+                    mirrorXNode.setTranslateX(node.getBoundsInParent().getWidth() + 10);
+
+                    double scX = node.getScaleX();
+                    mirrorXNode.setScaleX(-1 * scX);
+
+
                 }else {
-                    //开  --->  关
-                    flagX = 0;
-                    mirrorXimg.setImage(new Image("/image/close.png"));
+                    centerPane.getChildren().remove(mirrorXNode);
                 }
             }
         });
 
-        mirrorYimg.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        //垂直镜像
+        mirrorYBtn.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            Node mirrorYNode = null;
             @Override
-            public void handle(MouseEvent event) {
-                if (flagY == 0){
-                    flagY = 1;
-                    //关 --->  开
-                    mirrorYimg.setImage(new Image("/image/open.png"));
-                }else {
-                    //开  --->  关
-                    flagY = 0;
-                    mirrorYimg.setImage(new Image("/image/close.png"));
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue.equals(true)){
+                    try {
+                        mirrorYNode = (Node) BeanUtils.cloneBean(node);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    }
 
+
+                    ObservableList<Transform> transforms = node.getTransforms();
+                    mirrorYNode.getTransforms().addAll(transforms);
+                    centerPane.getChildren().add(mirrorYNode);
+
+                    mirrorYNode.setTranslateY(node.getBoundsInParent().getHeight() + 10);
+                    mirrorYNode.setScaleY(-1);
+                }else {
+                    centerPane.getChildren().remove(mirrorYNode);
                 }
             }
         });
+
     }
 
     //节点错切变换
     private void shear(Node node) {
-        shearX.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        shearX.valueProperty().addListener((observable, oldValue, newValue) -> {
 
+            currentShearX = newValue.doubleValue() - oldValue.doubleValue();
+            double pivotX = node.getLayoutBounds().getWidth() / 2;
+            double pivotY = node.getLayoutBounds().getMaxY();
+            Shear shX = new Shear(currentShearX, 0, pivotX, pivotY);
 
-                currentShearX = newValue.doubleValue() - oldValue.doubleValue();
-                double pivotX = node.getLayoutBounds().getWidth() / 2;
-                double pivotY = node.getLayoutBounds().getMaxY();
-                Shear shX = new Shear(currentShearX, 0, pivotX, pivotY);
-
-                node.getTransforms().add(shX);
-            }
+            node.getTransforms().add(shX);
         });
 
-        shearY.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        shearY.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-                currentShearY = newValue.doubleValue() - oldValue.doubleValue();
-                double pivotX = node.getLayoutBounds().getMinX();
-                double pivotY = node.getLayoutBounds().getHeight() / 2;
+            currentShearY = newValue.doubleValue() - oldValue.doubleValue();
+            double pivotX = node.getLayoutBounds().getMinX();
+            double pivotY = node.getLayoutBounds().getHeight() / 2;
 
-                Shear shY = new Shear(0, currentShearY, pivotX,pivotY);
-                node.getTransforms().add(shY);
+            Shear shY = new Shear(0, currentShearY, pivotX,pivotY);
+            node.getTransforms().add(shY);
 
-            }
         });
+
+
     }
 
 
     //正负数的正则表达式
-    private boolean regex(String content) {
-        Pattern r = Pattern.compile("^[-\\+]?[\\d]*$");
+    private boolean judgeNum(String content) {
+        Pattern r = Pattern.compile("^[-+]?[\\d]*$");
         Matcher m = r.matcher(content);
-        return m.matches();
+        return !m.matches();
     }
 
 }

@@ -1,5 +1,6 @@
 package edu.ahnu.controller;
 
+import com.jfoenix.controls.JFXColorPicker;
 import edu.ahnu.controller.module.*;
 import edu.ahnu.util.DragAndChangeUtil;
 import javafx.collections.ObservableMap;
@@ -44,7 +45,7 @@ public class MainController implements Initializable {
     private Button coneButton;
 
     @FXML
-    private ColorPicker colorPicker;
+    private JFXColorPicker colorPicker;
 
     @FXML
     private MenuItem clearButton;
@@ -170,8 +171,9 @@ public class MainController implements Initializable {
             toolPane.getChildren().add(root);
 
             ToolsController toolsController = fxmlLoader.getController();
-            toolsController.showTools(node, toolPane);
+            toolsController.showTools(node, centerPane);
 
+            
         }
     }
 
