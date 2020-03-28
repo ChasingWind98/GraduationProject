@@ -19,14 +19,13 @@
    <top>
       <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="文件">
+          <Menu mnemonicParsing="false" text="新建">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="编辑">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#createCube2" text="正方体" />
+                  <MenuItem mnemonicParsing="false" onAction="#createCuboid2" text="长方体" />
+                  <MenuItem mnemonicParsing="false" onAction="#createBall2" text="球体" />
+                  <MenuItem mnemonicParsing="false" onAction="#createCylinder2" text="圆柱体" />
+                  <MenuItem mnemonicParsing="false" onAction="#createPyramid2" text="四棱锥" />
             </items>
           </Menu>
           <Menu fx:id="clearMenu" mnemonicParsing="false" text="清除画板">
@@ -53,7 +52,7 @@
             <AnchorPane fx:id="leftPane" prefHeight="633.0" prefWidth="168.0">
                <children>
                   <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
-                  <AnchorPane fx:id="lightPane" layoutX="-1.0" layoutY="306.0" prefHeight="319.0" prefWidth="168.0" />
+                  <AnchorPane fx:id="lightPane" layoutX="-1.0" layoutY="306.0" prefHeight="225.0" prefWidth="168.0" />
                   <JFXButton fx:id="cubeButton" buttonType="RAISED" layoutX="10.0" layoutY="14.0" onAction="#createCube" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
@@ -133,6 +132,7 @@
                   </JFXColorPicker>
                   <Label layoutX="18.0" layoutY="267.0" text="设置光源" />
                   <JFXToggleButton fx:id="lightBtn" layoutX="74.0" layoutY="246.0" onAction="#lightOnOff" prefHeight="60.0" prefWidth="74.0" />
+                  <Label layoutX="18.0" layoutY="540.0" text="设置材质" />
                </children>
             </AnchorPane>
          </content>

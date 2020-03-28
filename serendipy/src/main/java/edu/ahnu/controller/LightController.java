@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.AmbientLight;
 import javafx.scene.Cursor;
 import javafx.scene.PointLight;
@@ -16,12 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Material;
 import javafx.scene.paint.Paint;
-
-import java.io.Serializable;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class LightController {
 
@@ -34,7 +28,6 @@ public class LightController {
     @FXML
     private JFXColorPicker lightColorPicker;
 
-
     private AmbientLight ambientLight;
 
     private PointLight pointLight;
@@ -42,6 +35,8 @@ public class LightController {
     private JFXButton jfxBtn;
 
     private Color color;
+
+
 
 
 
@@ -63,11 +58,9 @@ public class LightController {
                         }
                     });
 
-
                     pane.getChildren().add(ambientLight);
 
                 } else {
-                    //ambientLight.setLightOn(false);
                     pane.getChildren().remove(ambientLight);
                 }
             }
@@ -121,6 +114,7 @@ public class LightController {
                     });
 
                 } else {
+
                     pane.getChildren().removeAll(pointLight, jfxBtn);
                 }
             }
@@ -129,6 +123,14 @@ public class LightController {
 
     }
 
+    /**
+     * 关闭所有的光源效果
+     */
+    public void closeAllLight(Pane pane){
+
+        pane.getChildren().removeAll(pointLight,jfxBtn);
+
+    }
 
 
 

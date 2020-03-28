@@ -1,20 +1,22 @@
 package edu.ahnu.controller.module;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import edu.ahnu.util.ImagePathUtil;
+import edu.ahnu.util.RegexUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import lombok.Data;
-
-import javax.tools.Tool;
 
 @Data
 public class CubeController {
@@ -30,7 +32,20 @@ public class CubeController {
 
 
     @FXML
-    private TextField lengthText;
+    private JFXTextField sideLength;
+
+
+    @FXML
+    private JFXTextField layoutX;
+
+    @FXML
+    private JFXTextField layoutY;
+
+    @FXML
+    private JFXButton createBtn;
+
+
+
 
 
     //flag用于判断鼠标释放之前的状态
@@ -92,6 +107,76 @@ public class CubeController {
         });
 
     }
+
+
+    public void createCube2(Pane pane, ColorPicker colorPicker) {
+        sideLength.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (RegexUtil.judgeNum(newValue)){
+                    sideLength.setText(oldValue);
+                }
+            }
+        });
+
+        layoutX.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (RegexUtil.judgeNum(newValue)){
+                    layoutX.setText(oldValue);
+                }
+            }
+        });
+
+
+        layoutY.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (RegexUtil.judgeNum(newValue)){
+                    layoutY.setText(oldValue);
+                }
+            }
+        });
+
+
+
+        createBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //不合法的数据
+                if (sideLength.getText().isEmpty() || layoutX.getText().isEmpty() || layoutY.getText().isEmpty()){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
+                    alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
+                    alert.show();
+                }else {
+                    double sideLen = Double.parseDouble(sideLength.getText());
+                    double layX = Double.parseDouble(layoutX.getText());
+                    double layY = Double.parseDouble(layoutY.getText());
+
+                    Box box2 = new Box(sideLen, sideLen, sideLen);
+                    box2.setLayoutX(layX);
+                    box2.setLayoutY(layY);
+
+                    pane.getChildren().add(box2);
+
+                    //创建材质
+                    Color value = colorPicker.valueProperty().getValue();
+                    material = new PhongMaterial();
+                    material.setDiffuseColor(value);
+
+                    box2.setMaterial(material);
+
+                }
+            }
+        });
+
+
+
+
+    }
+
+
 
 
 }

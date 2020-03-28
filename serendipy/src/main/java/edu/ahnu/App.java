@@ -1,5 +1,6 @@
 package edu.ahnu;
 
+import edu.ahnu.util.StageMapUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.PerspectiveCamera;
@@ -42,5 +43,7 @@ public class App extends Application {
         primaryStage.getIcons().add(new Image("/image/icon.png"));
 
         primaryStage.show();
+
+        StageMapUtil.STAGE.put("topStage", primaryStage);
     }
 }

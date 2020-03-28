@@ -2,20 +2,24 @@ package edu.ahnu.controller;
 
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXToggleButton;
+import edu.ahnu.App;
 import edu.ahnu.controller.module.*;
 import edu.ahnu.util.DragAndChangeUtil;
+import edu.ahnu.util.StageMapUtil;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.DepthTest;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lombok.Data;
 
 import java.io.IOException;
@@ -25,7 +29,6 @@ import java.util.ResourceBundle;
 
 @Data
 public class MainController implements Initializable {
-
 
     //页面上的图形按钮
     @FXML
@@ -92,7 +95,7 @@ public class MainController implements Initializable {
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        centerPane.setDepthTest(DepthTest.ENABLE);
+        centerPane.setDepthTest(DepthTest.DISABLE);
     }
 
 
@@ -105,12 +108,60 @@ public class MainController implements Initializable {
         cubeController.drawCube(centerPane, colorPicker);
     }
 
+    @FXML
+    void createCube2(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/module/cube.fxml");
+        fxmlLoader.setLocation(url);
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+
+
+        CubeController cubeController = fxmlLoader.getController();
+        cubeController.createCube2(centerPane, colorPicker);
+
+
+        Scene scene = new Scene(root,300, 200);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.initOwner(StageMapUtil.STAGE.get("topStage"));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setTitle("正方体参数设置");
+        stage.setResizable(false);
+        stage.show();
+
+      /* Dialog<ButtonType> dialog = new Dialog<>();
+
+       dialog.getDialogPane().getButtonTypes().add(ButtonType.FINISH);
+       dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Button finishBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.FINISH);
+        Button cancelBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+
+        finishBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        dialog.show();*/
+    }
+
+
     //长方体
     @FXML
     void createCuboid(ActionEvent event) throws IOException {
 
        CuboidController cuboidController = new CuboidController();
         cuboidController.drawCuboid(centerPane, colorPicker);
+    }
+
+    @FXML
+    void createCuboid2(ActionEvent event) {
+
     }
 
     //球体
@@ -122,12 +173,22 @@ public class MainController implements Initializable {
         ballController.drawBall(centerPane, colorPicker);
     }
 
+    @FXML
+    void createBall2(ActionEvent event) {
+
+    }
+
     //圆柱体
     @FXML
     void createCylinder(ActionEvent event) throws IOException {
 
        CylinderController cylinderController = new CylinderController();
         cylinderController.drawCylinder(centerPane, colorPicker);
+    }
+
+    @FXML
+    void createCylinder2(ActionEvent event) {
+
     }
 
 
@@ -138,6 +199,11 @@ public class MainController implements Initializable {
 
         PyramidController pyramidController = new PyramidController();
         pyramidController.drawPyramid(centerPane, colorPicker);
+
+    }
+
+    @FXML
+    void createPyramid2(ActionEvent event) {
 
     }
 
@@ -193,18 +259,22 @@ public class MainController implements Initializable {
 
     @FXML
     void lightOnOff(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL url = fxmlLoader.getClassLoader().getResource("view/light.fxml");
+        fxmlLoader.setLocation(url);
+        AnchorPane root = (AnchorPane) fxmlLoader.load();
+        LightController lightController = fxmlLoader.getController();
+
         if (lightFlag == 0){
             lightFlag = 1;
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            URL url = fxmlLoader.getClassLoader().getResource("view/light.fxml");
-            fxmlLoader.setLocation(url);
-            AnchorPane root = (AnchorPane) fxmlLoader.load();
             lightPane.getChildren().add(root);
 
-            LightController lightController = fxmlLoader.getController();
             lightController.onOffLight(centerPane);
         }else if (lightFlag == 1){
             lightFlag = 0;
+           //lightController.closeAllLight(centerPane);
+
             lightPane.getChildren().clear();
         }
     }
