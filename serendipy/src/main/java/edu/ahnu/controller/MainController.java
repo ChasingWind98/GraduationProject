@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXToggleButton;
 import edu.ahnu.App;
 import edu.ahnu.controller.module.*;
+import edu.ahnu.util.AlertDialogUtil;
 import edu.ahnu.util.DragAndChangeUtil;
 import edu.ahnu.util.StageMapUtil;
 import javafx.event.ActionEvent;
@@ -111,43 +112,11 @@ public class MainController implements Initializable {
     @FXML
     void createCube2(ActionEvent event) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL url = fxmlLoader.getClassLoader().getResource("view/module/cube.fxml");
-        fxmlLoader.setLocation(url);
-        AnchorPane root = (AnchorPane) fxmlLoader.load();
-
-
-        CubeController cubeController = fxmlLoader.getController();
+        String resources = "view/module/cube.fxml";
+        String title = "正方体参数设置";
+        CubeController cubeController = (CubeController) AlertDialogUtil.generateDialog(resources, title);
         cubeController.createCube2(centerPane, colorPicker);
 
-
-        Scene scene = new Scene(root,300, 200);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-
-        stage.initOwner(StageMapUtil.STAGE.get("topStage"));
-        stage.initStyle(StageStyle.UTILITY);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setTitle("正方体参数设置");
-        stage.setResizable(false);
-        stage.show();
-
-      /* Dialog<ButtonType> dialog = new Dialog<>();
-
-       dialog.getDialogPane().getButtonTypes().add(ButtonType.FINISH);
-       dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-
-        Button finishBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.FINISH);
-        Button cancelBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
-
-        finishBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-            }
-        });
-
-        dialog.show();*/
     }
 
 
@@ -160,8 +129,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void createCuboid2(ActionEvent event) {
-
+    void createCuboid2(ActionEvent event) throws IOException {
+        String resources = "view/module/cuboid.fxml";
+        String title = "长方体参数设置";
+        CuboidController cuboidController = (CuboidController) AlertDialogUtil.generateDialog(resources, title);
+        cuboidController.createCuboid2(centerPane, colorPicker);
     }
 
     //球体
@@ -174,8 +146,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void createBall2(ActionEvent event) {
-
+    void createBall2(ActionEvent event) throws IOException {
+        String resources = "view/module/ball.fxml";
+        String title = "球体参数设置";
+        BallController ballController = (BallController) AlertDialogUtil.generateDialog(resources, title);
+        ballController.createBall2(centerPane, colorPicker);
     }
 
     //圆柱体
@@ -187,8 +162,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void createCylinder2(ActionEvent event) {
-
+    void createCylinder2(ActionEvent event) throws IOException {
+        String resources = "view/module/cylinder.fxml";
+        String title = "圆柱体参数设置";
+        CylinderController cylinderController = (CylinderController) AlertDialogUtil.generateDialog(resources, title);
+        cylinderController.createCylinder2(centerPane, colorPicker);
     }
 
 
@@ -203,8 +181,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void createPyramid2(ActionEvent event) {
-
+    void createPyramid2(ActionEvent event) throws IOException {
+        String resources = "view/module/pyramid.fxml";
+        String title = "正四棱锥参数设置";
+        PyramidController pyramidController = (PyramidController) AlertDialogUtil.generateDialog(resources, title);
+        pyramidController.createPyramid2(centerPane, colorPicker);
     }
 
 

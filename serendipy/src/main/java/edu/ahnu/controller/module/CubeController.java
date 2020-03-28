@@ -32,14 +32,14 @@ public class CubeController {
 
 
     @FXML
-    private JFXTextField sideLength;
+    private JFXTextField sideText;
 
 
     @FXML
-    private JFXTextField layoutX;
+    private JFXTextField layoutXText;
 
     @FXML
-    private JFXTextField layoutY;
+    private JFXTextField layoutYText;
 
     @FXML
     private JFXButton createBtn;
@@ -110,30 +110,30 @@ public class CubeController {
 
 
     public void createCube2(Pane pane, ColorPicker colorPicker) {
-        sideLength.textProperty().addListener(new ChangeListener<String>() {
+        sideText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (RegexUtil.judgeNum(newValue)){
-                    sideLength.setText(oldValue);
+                    sideText.setText(oldValue);
                 }
             }
         });
 
-        layoutX.textProperty().addListener(new ChangeListener<String>() {
+        layoutXText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (RegexUtil.judgeNum(newValue)){
-                    layoutX.setText(oldValue);
+                    layoutXText.setText(oldValue);
                 }
             }
         });
 
 
-        layoutY.textProperty().addListener(new ChangeListener<String>() {
+        layoutYText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (RegexUtil.judgeNum(newValue)){
-                    layoutY.setText(oldValue);
+                    layoutYText.setText(oldValue);
                 }
             }
         });
@@ -144,15 +144,15 @@ public class CubeController {
             @Override
             public void handle(ActionEvent event) {
                 //不合法的数据
-                if (sideLength.getText().isEmpty() || layoutX.getText().isEmpty() || layoutY.getText().isEmpty()){
+                if (sideText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
                     alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
                     alert.show();
                 }else {
-                    double sideLen = Double.parseDouble(sideLength.getText());
-                    double layX = Double.parseDouble(layoutX.getText());
-                    double layY = Double.parseDouble(layoutY.getText());
+                    double sideLen = Double.parseDouble(sideText.getText());
+                    double layX = Double.parseDouble(layoutXText.getText());
+                    double layY = Double.parseDouble(layoutYText.getText());
 
                     Box box2 = new Box(sideLen, sideLen, sideLen);
                     box2.setLayoutX(layX);
@@ -166,6 +166,8 @@ public class CubeController {
                     material.setDiffuseColor(value);
 
                     box2.setMaterial(material);
+
+
 
                 }
             }

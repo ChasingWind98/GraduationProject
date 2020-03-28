@@ -3,6 +3,9 @@ package edu.ahnu.util;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
+/**
+ * 自定义四棱锥
+ */
 public class CustomTriangleMesh {
     public static MeshView generatePyramid(double side, double height) {
 
