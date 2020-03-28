@@ -1,15 +1,19 @@
 package edu.ahnu.controller;
 
 import com.jfoenix.controls.JFXColorPicker;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.ahnu.controller.module.*;
 import edu.ahnu.util.DragAndChangeUtil;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.DepthTest;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.Data;
@@ -22,8 +26,6 @@ import java.util.ResourceBundle;
 @Data
 public class MainController implements Initializable {
 
-
-    ObservableMap<String, Node> map;
 
     //页面上的图形按钮
     @FXML
@@ -48,6 +50,9 @@ public class MainController implements Initializable {
     private JFXColorPicker colorPicker;
 
     @FXML
+    private JFXToggleButton lightBtn;
+
+    @FXML
     private MenuItem clearButton;
 
 
@@ -68,6 +73,9 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane centerPane;
 
+    @FXML
+    private AnchorPane lightPane;
+
 
     //工具区域
     @FXML
@@ -77,11 +85,14 @@ public class MainController implements Initializable {
     private Button chooseButton;
 
 
+    //光源开关状态
+    private int lightFlag = 0;
 
 
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        centerPane.setDepthTest(DepthTest.ENABLE);
     }
 
 
@@ -159,9 +170,10 @@ public class MainController implements Initializable {
         centerPane.setOnMouseReleased(null);
         //添加拖拽 以及变换功能
         for (Node node : centerPane.getChildren()) {
+
             DragAndChangeUtil.draggable(node);
             DragAndChangeUtil.changeable(node);
-
+            DragAndChangeUtil.colorful(node, colorPicker, centerPane);
 
             toolPane.getChildren().clear();
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -173,9 +185,31 @@ public class MainController implements Initializable {
             ToolsController toolsController = fxmlLoader.getController();
             toolsController.showTools(node, centerPane);
 
-            
+
+
         }
     }
+
+
+    @FXML
+    void lightOnOff(ActionEvent event) throws IOException {
+        if (lightFlag == 0){
+            lightFlag = 1;
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            URL url = fxmlLoader.getClassLoader().getResource("view/light.fxml");
+            fxmlLoader.setLocation(url);
+            AnchorPane root = (AnchorPane) fxmlLoader.load();
+            lightPane.getChildren().add(root);
+
+            LightController lightController = fxmlLoader.getController();
+            lightController.onOffLight(centerPane);
+        }else if (lightFlag == 1){
+            lightFlag = 0;
+            lightPane.getChildren().clear();
+        }
+    }
+
+
 
 
 }

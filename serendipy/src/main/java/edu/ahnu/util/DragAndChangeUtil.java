@@ -3,10 +3,13 @@ package edu.ahnu.util;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.RotateEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Shape3D;
 
 public class DragAndChangeUtil {
 
@@ -26,6 +29,7 @@ public class DragAndChangeUtil {
     public static void draggable(Node node) {
         final Position pos = new Position();
 
+
         // 提示用户该结点可点击
         node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             node.setCursor(Cursor.HAND);
@@ -36,21 +40,28 @@ public class DragAndChangeUtil {
 
         // 提示用户该结点可拖拽
         node.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            node.setCursor(Cursor.MOVE);
+            node.setCursor(Cursor.HAND);
 
             // 当按压事件发生时，缓存事件发生的位置坐标
             pos.x = event.getX();
             pos.y = event.getY();
+
         });
 
 
         // 实现拖拽功能
         node.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+
+            node.setCursor(Cursor.MOVE);
+
+
             double distanceX = event.getX() - pos.x;
             double distanceY = event.getY() - pos.y;
 
+
             double x = node.getLayoutX() + distanceX;
             double y = node.getLayoutY() + distanceY;
+
 
             // 计算出 x、y 后将结点重定位到指定坐标点 (x, y)
             node.relocate(x, y);
@@ -104,6 +115,36 @@ public class DragAndChangeUtil {
 
     }
 
+
+    public static void colorful(Node node, ColorPicker colorPicker, Pane pane) {
+
+        node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //双击改变颜色
+                if (event.getClickCount() == 2) {
+                    Color value = colorPicker.valueProperty().getValue();
+                    PhongMaterial material = new PhongMaterial();
+                    material.setDiffuseColor(value);
+                    Shape3D shape3D = null;
+                    try {
+                        shape3D = (Shape3D) node;
+                        shape3D.setMaterial(material);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                //三击 删除节点
+                if (event.getClickCount() == 3){
+                    pane.getChildren().remove(node);
+                }
+
+            }
+        });
+
+
+    }
 
 
 
