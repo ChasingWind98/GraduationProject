@@ -2,25 +2,18 @@ package edu.ahnu.controller;
 
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXToggleButton;
-import edu.ahnu.App;
 import edu.ahnu.controller.module.*;
 import edu.ahnu.util.AlertDialogUtil;
 import edu.ahnu.util.DragAndChangeUtil;
-import edu.ahnu.util.StageMapUtil;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.DepthTest;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lombok.Data;
 
 import java.io.IOException;
@@ -56,6 +49,8 @@ public class MainController implements Initializable {
     @FXML
     private JFXToggleButton lightBtn;
 
+
+
     @FXML
     private MenuItem clearButton;
 
@@ -80,6 +75,9 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane lightPane;
 
+    @FXML
+    private AnchorPane grainPane;
+
 
     //工具区域
     @FXML
@@ -91,6 +89,8 @@ public class MainController implements Initializable {
 
     //光源开关状态
     private int lightFlag = 0;
+    //材质开光状态
+    private int grainFlag = 0;
 
 
     //初始化
@@ -224,15 +224,24 @@ public class MainController implements Initializable {
 
             toolPane.getChildren().clear();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            URL url = fxmlLoader.getClassLoader().getResource("view/tools.fxml");
-            fxmlLoader.setLocation(url);
+            URL toolsUrl = fxmlLoader.getClassLoader().getResource("view/tools.fxml");
+            fxmlLoader.setLocation(toolsUrl);
             AnchorPane root = (AnchorPane) fxmlLoader.load();
+
             toolPane.getChildren().add(root);
 
             ToolsController toolsController = fxmlLoader.getController();
             toolsController.showTools(node, centerPane);
 
 
+           grainPane.getChildren().clear();
+           FXMLLoader fxmlLoader1 = new FXMLLoader();
+            URL grainUrl = fxmlLoader.getClassLoader().getResource("view/grain.fxml");
+            fxmlLoader1.setLocation(grainUrl);
+            AnchorPane grainRoot = fxmlLoader1.load();
+            grainPane.getChildren().add(grainRoot);
+            GrainController grainController = fxmlLoader1.getController();
+            grainController.addGrain(node);
 
         }
     }
@@ -259,6 +268,11 @@ public class MainController implements Initializable {
             lightPane.getChildren().clear();
         }
     }
+
+
+
+
+
 
 
 
