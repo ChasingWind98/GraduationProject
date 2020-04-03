@@ -96,7 +96,7 @@ public class MainController implements Initializable {
     //初始化
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        centerPane.setDepthTest(DepthTest.DISABLE);
+        centerPane.setDepthTest(DepthTest.ENABLE);
     }
 
 
@@ -215,33 +215,14 @@ public class MainController implements Initializable {
         centerPane.setOnMousePressed(null);
         centerPane.setOnMouseDragged(null);
         centerPane.setOnMouseReleased(null);
+
+
         //添加拖拽 以及变换功能
         for (Node node : centerPane.getChildren()) {
 
             DragAndChangeUtil.draggable(node);
-            DragAndChangeUtil.changeable(node);
-            DragAndChangeUtil.colorful(node, colorPicker, centerPane);
-
-            toolPane.getChildren().clear();
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            URL toolsUrl = fxmlLoader.getClassLoader().getResource("view/tools.fxml");
-            fxmlLoader.setLocation(toolsUrl);
-            AnchorPane root = (AnchorPane) fxmlLoader.load();
-
-            toolPane.getChildren().add(root);
-
-            ToolsController toolsController = fxmlLoader.getController();
-            toolsController.showTools(node, centerPane);
-
-
-           grainPane.getChildren().clear();
-           FXMLLoader fxmlLoader1 = new FXMLLoader();
-            URL grainUrl = fxmlLoader.getClassLoader().getResource("view/grain.fxml");
-            fxmlLoader1.setLocation(grainUrl);
-            AnchorPane grainRoot = fxmlLoader1.load();
-            grainPane.getChildren().add(grainRoot);
-            GrainController grainController = fxmlLoader1.getController();
-            grainController.addGrain(node);
+            DragAndChangeUtil.changeWithTouchPad(node);
+            DragAndChangeUtil.colorChangeGrain(node, colorPicker, centerPane, toolPane, grainPane);
 
         }
     }
@@ -268,10 +249,6 @@ public class MainController implements Initializable {
             lightPane.getChildren().clear();
         }
     }
-
-
-
-
 
 
 

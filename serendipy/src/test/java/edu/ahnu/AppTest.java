@@ -1,5 +1,6 @@
 package edu.ahnu;
 
+import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -46,10 +47,16 @@ public class AppTest extends Application
         Rotate rotateY = new Rotate(30, Rotate.Y_AXIS);
         rect1.getTransforms().addAll(rotateX,rotateY);
 
+        JFXScrollPane scrollPane = new JFXScrollPane();
+        scrollPane.setLayoutX(600);
+        scrollPane.setLayoutY(300);
+        scrollPane.setPrefSize(100, 50);
+        scrollPane.getChildren().addAll(rect1,colorPicker,button);
+
 
         AnchorPane root = new AnchorPane();
 
-        root.getChildren().addAll(rect1, button, button2, colorPicker);
+        root.getChildren().addAll(rect1, button, button2, colorPicker, scrollPane);
 
         button.selectedProperty().addListener(new ChangeListener<Boolean>() {
 

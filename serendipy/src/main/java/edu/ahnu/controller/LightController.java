@@ -98,6 +98,7 @@ public class LightController {
                     DragAndChangeUtil.draggable(jfxBtn);
 
 
+
                     jfxBtn.setOnMousePressed(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {

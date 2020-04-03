@@ -1,15 +1,22 @@
 package edu.ahnu.util;
 
+import edu.ahnu.controller.GrainController;
+import edu.ahnu.controller.ToolsController;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Shape3D;
+import lombok.SneakyThrows;
+
+import java.net.URL;
 
 public class DragAndChangeUtil {
 
@@ -40,7 +47,7 @@ public class DragAndChangeUtil {
 
         // 提示用户该结点可拖拽
         node.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            node.setCursor(Cursor.HAND);
+            node.setCursor(Cursor.MOVE);
 
             // 当按压事件发生时，缓存事件发生的位置坐标
             pos.x = event.getX();
@@ -77,7 +84,7 @@ public class DragAndChangeUtil {
      *
      * @param node 图形节点
      */
-    public static void changeable(Node node) {
+    public static void changeWithTouchPad(Node node) {
         //通过触控板手势实现缩放
         node.setOnZoom(new EventHandler<ZoomEvent>() {
             @Override
@@ -115,16 +122,47 @@ public class DragAndChangeUtil {
 
 
 
+
+
     }
 
 
-    public static void colorful(Node node, ColorPicker colorPicker, Pane pane) {
+    public static void colorChangeGrain(Node node, ColorPicker colorPicker, Pane centerPane, Pane toolPane, Pane grainPane) {
+
 
         node.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @SneakyThrows
             @Override
             public void handle(MouseEvent event) {
+
+                if (event.getClickCount() == 1){
+
+                    toolPane.getChildren().clear();
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    URL toolsUrl = fxmlLoader.getClassLoader().getResource("view/tools.fxml");
+                    fxmlLoader.setLocation(toolsUrl);
+                    AnchorPane root = (AnchorPane) fxmlLoader.load();
+                    toolPane.getChildren().add(root);
+
+                    ToolsController toolsController = fxmlLoader.getController();
+                    toolsController.showTools(node, centerPane);
+
+
+                    grainPane.getChildren().clear();
+                    FXMLLoader fxmlLoader1 = new FXMLLoader();
+                    URL grainUrl = fxmlLoader.getClassLoader().getResource("view/grain.fxml");
+                    fxmlLoader1.setLocation(grainUrl);
+                    AnchorPane grainRoot = fxmlLoader1.load();
+                    grainPane.getChildren().add(grainRoot);
+
+                    GrainController grainController = fxmlLoader1.getController();
+                    grainController.addGrain(node);
+
+                }
+
                 //双击改变颜色
-                if (event.getClickCount() == 2) {
+                else if (event.getClickCount() == 2) {
                     Color value = colorPicker.valueProperty().getValue();
                     PhongMaterial material = new PhongMaterial();
                     material.setDiffuseColor(value);
@@ -139,7 +177,7 @@ public class DragAndChangeUtil {
 
                 //三击 删除节点
                 if (event.getClickCount() == 3){
-                    pane.getChildren().remove(node);
+                    centerPane.getChildren().remove(node);
                 }
 
             }
