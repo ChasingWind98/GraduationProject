@@ -47,5 +47,6 @@ public class App extends Application {
 
         System.out.println("test hot-fix333333");
         System.out.println("test hot-fix22");
+        System.out.println("master----");
     }
 }
