@@ -46,5 +46,6 @@ public class App extends Application {
         StageMapUtil.STAGE.put("topStage", primaryStage);
 
         System.out.println("test hot-fix22");
+        System.out.println("hot-fix----");
     }
 }
