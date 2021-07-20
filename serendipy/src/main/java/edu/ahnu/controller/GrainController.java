@@ -31,9 +31,9 @@ public class GrainController implements Initializable {
     @FXML
     private JFXToggleButton grainBtn4;
 
-   private ToggleGroup group;
+    private ToggleGroup group;
 
-   private PhongMaterial phongMaterial;
+    private PhongMaterial phongMaterial;
 
 
     @Override
@@ -46,7 +46,7 @@ public class GrainController implements Initializable {
     }
 
 
-    public void addGrain(Node node){
+    public void addGrain(Node node) {
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -58,32 +58,32 @@ public class GrainController implements Initializable {
                 } catch (Exception e) {
 
                 }
-                if (grainBtn1.isSelected()){
+                if (grainBtn1.isSelected()) {
                     //纹理1
                     phongMaterial.setDiffuseMap(new Image("image/grain/muzhi.jpg"));
                     phongMaterial.setBumpMap(new Image("image/grain/muzhi.png"));
-                   shape.setMaterial(phongMaterial);
-                    
-                }else if (grainBtn2.isSelected()){
+                    shape.setMaterial(phongMaterial);
+
+                } else if (grainBtn2.isSelected()) {
                     //纹理2
                     phongMaterial.setDiffuseMap(new Image("image/grain/qiangbi.jpg"));
                     phongMaterial.setBumpMap(new Image("image/grain/qiangbi.png"));
                     shape.setMaterial(phongMaterial);
 
-                }else if (grainBtn3.isSelected()){
+                } else if (grainBtn3.isSelected()) {
                     //纹理3
 
                     phongMaterial.setDiffuseMap(new Image("image/grain/fushihui.jpg"));
                     phongMaterial.setBumpMap(new Image("image/grain/fushihui.png"));
                     shape.setMaterial(phongMaterial);
 
-                }else if (grainBtn4.isSelected()){
+                } else if (grainBtn4.isSelected()) {
                     //纹理4
                     phongMaterial.setDiffuseMap(new Image("image/grain/gezi.jpg"));
                     phongMaterial.setBumpMap(new Image("image/grain/gezi.png"));
                     shape.setMaterial(phongMaterial);
 
-                }else {
+                } else {
                     phongMaterial.setDiffuseMap(null);
                     phongMaterial.setBumpMap(null);
                     shape.setMaterial(phongMaterial);

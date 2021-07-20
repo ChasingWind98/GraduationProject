@@ -20,11 +20,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- *
  * @author blj0011
  */
-public class AppTest extends Application
-{
+public class AppTest extends Application {
     @Override
     public void start(Stage primaryStage) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
@@ -45,13 +43,13 @@ public class AppTest extends Application
         rect1.setLayoutY(100);
         Rotate rotateX = new Rotate(30, Rotate.X_AXIS);
         Rotate rotateY = new Rotate(30, Rotate.Y_AXIS);
-        rect1.getTransforms().addAll(rotateX,rotateY);
+        rect1.getTransforms().addAll(rotateX, rotateY);
 
         JFXScrollPane scrollPane = new JFXScrollPane();
         scrollPane.setLayoutX(600);
         scrollPane.setLayoutY(300);
         scrollPane.setPrefSize(100, 50);
-        scrollPane.getChildren().addAll(rect1,colorPicker,button);
+        scrollPane.getChildren().addAll(rect1, colorPicker, button);
 
 
         AnchorPane root = new AnchorPane();
@@ -61,15 +59,16 @@ public class AppTest extends Application
         button.selectedProperty().addListener(new ChangeListener<Boolean>() {
 
             Rectangle rect2 = new Rectangle();
+
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue.equals(true)){
+                if (newValue.equals(true)) {
 
-                   try {
+                    try {
                         rect2 = (Rectangle) BeanUtils.cloneBean(rect1);
 
 
-                   } catch (IllegalAccessException e) {
+                    } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     } catch (InstantiationException e) {
                         e.printStackTrace();
@@ -88,7 +87,7 @@ public class AppTest extends Application
 
                     rect2.getTransforms().addAll(translate, scale);
 
-                }else {
+                } else {
                     root.getChildren().remove(rect2);
                 }
             }
@@ -98,17 +97,17 @@ public class AppTest extends Application
         button2.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-               if (newValue.equals(true)){
-                   Reflection reflection = new Reflection();
-                   reflection.setTopOpacity(1);
-                   reflection.setBottomOpacity(1);
-                   reflection.setTopOffset(10);
-                   reflection.setFraction(1);
+                if (newValue.equals(true)) {
+                    Reflection reflection = new Reflection();
+                    reflection.setTopOpacity(1);
+                    reflection.setBottomOpacity(1);
+                    reflection.setTopOffset(10);
+                    reflection.setFraction(1);
 
-                   rect1.setEffect(reflection);
-               }else {
-                   rect1.setEffect(null);
-               }
+                    rect1.setEffect(reflection);
+                } else {
+                    rect1.setEffect(null);
+                }
             }
         });
 
@@ -126,8 +125,7 @@ public class AppTest extends Application
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }

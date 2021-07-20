@@ -56,7 +56,7 @@ public class CuboidController {
     private JFXButton createBtn;
 
 
-    public void drawCuboid(final Pane pane, ColorPicker colorPicker){
+    public void drawCuboid(final Pane pane, ColorPicker colorPicker) {
         pane.setOnMousePressed(event -> {
 
             flag = 1;
@@ -125,11 +125,11 @@ public class CuboidController {
     }
 
 
-    public void createCuboid2(Pane pane, ColorPicker colorPicker){
+    public void createCuboid2(Pane pane, ColorPicker colorPicker) {
         lengthText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     lengthText.setText(oldValue);
                 }
             }
@@ -138,7 +138,7 @@ public class CuboidController {
         widthText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     widthText.setText(oldValue);
                 }
             }
@@ -147,7 +147,7 @@ public class CuboidController {
         heightText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     heightText.setText(oldValue);
                 }
             }
@@ -156,7 +156,7 @@ public class CuboidController {
         layoutXText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutXText.setText(oldValue);
                 }
             }
@@ -166,12 +166,11 @@ public class CuboidController {
         layoutYText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutYText.setText(oldValue);
                 }
             }
         });
-
 
 
         createBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -179,12 +178,12 @@ public class CuboidController {
             public void handle(ActionEvent event) {
                 //不合法的数据
 
-                if (lengthText.getText().isEmpty() || widthText.getText().isEmpty() || heightText.getText().isEmpty() ||  layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()){
+                if (lengthText.getText().isEmpty() || widthText.getText().isEmpty() || heightText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
                     alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
                     alert.show();
-                }else {
+                } else {
                     double length = Double.parseDouble(lengthText.getText());
                     double width = Double.parseDouble(widthText.getText());
                     double height = Double.parseDouble(heightText.getText());

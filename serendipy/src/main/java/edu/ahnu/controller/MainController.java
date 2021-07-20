@@ -50,7 +50,6 @@ public class MainController implements Initializable {
     private JFXToggleButton lightBtn;
 
 
-
     @FXML
     private MenuItem clearButton;
 
@@ -124,7 +123,7 @@ public class MainController implements Initializable {
     @FXML
     void createCuboid(ActionEvent event) throws IOException {
 
-       CuboidController cuboidController = new CuboidController();
+        CuboidController cuboidController = new CuboidController();
         cuboidController.drawCuboid(centerPane, colorPicker);
     }
 
@@ -141,7 +140,7 @@ public class MainController implements Initializable {
     void createBall(ActionEvent event) throws IOException {
 
 
-       BallController ballController = new BallController();
+        BallController ballController = new BallController();
         ballController.drawBall(centerPane, colorPicker);
     }
 
@@ -157,7 +156,7 @@ public class MainController implements Initializable {
     @FXML
     void createCylinder(ActionEvent event) throws IOException {
 
-       CylinderController cylinderController = new CylinderController();
+        CylinderController cylinderController = new CylinderController();
         cylinderController.drawCylinder(centerPane, colorPicker);
     }
 
@@ -168,7 +167,6 @@ public class MainController implements Initializable {
         CylinderController cylinderController = (CylinderController) AlertDialogUtil.generateDialog(resources, title);
         cylinderController.createCylinder2(centerPane, colorPicker);
     }
-
 
 
     //四棱锥
@@ -237,21 +235,18 @@ public class MainController implements Initializable {
         AnchorPane root = (AnchorPane) fxmlLoader.load();
         LightController lightController = fxmlLoader.getController();
 
-        if (lightFlag == 0){
+        if (lightFlag == 0) {
             lightFlag = 1;
             lightPane.getChildren().add(root);
 
             lightController.onOffLight(centerPane);
-        }else if (lightFlag == 1){
+        } else if (lightFlag == 1) {
             lightFlag = 0;
-           //lightController.closeAllLight(centerPane);
+            //lightController.closeAllLight(centerPane);
 
             lightPane.getChildren().clear();
         }
     }
-
-
-
 
 
 }

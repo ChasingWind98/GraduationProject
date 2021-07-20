@@ -16,8 +16,9 @@ import java.net.URL;
 public class AlertDialogUtil {
     /**
      * 用于生成弹窗的工具类
+     *
      * @param resources 页面资源路径
-     * @param title 弹窗标题
+     * @param title     弹窗标题
      * @throws IOException
      */
     public static Object generateDialog(String resources, String title) throws IOException {
@@ -29,7 +30,7 @@ public class AlertDialogUtil {
         Object controller = fxmlLoader.getController();
 
 
-        Scene scene = new Scene(root,300, 200);
+        Scene scene = new Scene(root, 300, 200);
         Stage stage = new Stage();
         stage.setScene(scene);
 

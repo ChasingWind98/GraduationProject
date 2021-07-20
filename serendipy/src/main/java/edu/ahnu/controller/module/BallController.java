@@ -132,11 +132,11 @@ public class BallController {
 
     }
 
-    public void createBall2(Pane pane, ColorPicker colorPicker){
+    public void createBall2(Pane pane, ColorPicker colorPicker) {
         radiusText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     radiusText.setText(oldValue);
                 }
             }
@@ -145,7 +145,7 @@ public class BallController {
         layoutXText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutXText.setText(oldValue);
                 }
             }
@@ -155,24 +155,23 @@ public class BallController {
         layoutYText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutYText.setText(oldValue);
                 }
             }
         });
 
 
-
         createBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //不合法的数据
-                if (radiusText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()){
+                if (radiusText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
                     alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
                     alert.show();
-                }else {
+                } else {
                     double radius = Double.parseDouble(radiusText.getText());
                     double layX = Double.parseDouble(layoutXText.getText());
                     double layY = Double.parseDouble(layoutYText.getText());

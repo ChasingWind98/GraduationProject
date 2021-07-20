@@ -6,15 +6,18 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0" prefWidth="168.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.LightController">
-   <children>
-      <Label layoutX="15.0" layoutY="103.0" text="环境光" />
-      <Label layoutX="15.0" layoutY="183.0" text="点光源" />
-      <JFXToggleButton fx:id="ambientLightBtn" layoutX="64.0" layoutY="82.0" prefHeight="60.0" prefWidth="58.0">
-         <tooltip>
-            <Tooltip text="环境光默认开启，此处只是改变环境光的颜色" />
-         </tooltip></JFXToggleButton>
-      <JFXToggleButton fx:id="pointLightBtn" layoutX="64.0" layoutY="162.0" prefHeight="60.0" prefWidth="46.0" />
-      <JFXColorPicker fx:id="lightColorPicker" layoutX="27.0" layoutY="38.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="221.0"
+            prefWidth="168.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.ahnu.controller.LightController">
+    <children>
+        <Label layoutX="15.0" layoutY="103.0" text="环境光"/>
+        <Label layoutX="15.0" layoutY="183.0" text="点光源"/>
+        <JFXToggleButton fx:id="ambientLightBtn" layoutX="64.0" layoutY="82.0" prefHeight="60.0" prefWidth="58.0">
+            <tooltip>
+                <Tooltip text="环境光默认开启，此处只是改变环境光的颜色"/>
+            </tooltip>
+        </JFXToggleButton>
+        <JFXToggleButton fx:id="pointLightBtn" layoutX="64.0" layoutY="162.0" prefHeight="60.0" prefWidth="46.0"/>
+        <JFXColorPicker fx:id="lightColorPicker" layoutX="27.0" layoutY="38.0"/>
+    </children>
 </AnchorPane>

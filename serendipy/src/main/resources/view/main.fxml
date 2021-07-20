@@ -15,135 +15,151 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ahnu.controller.MainController">
-   <top>
-      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="新建">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#createCube2" text="正方体" />
-                  <MenuItem mnemonicParsing="false" onAction="#createCuboid2" text="长方体" />
-                  <MenuItem mnemonicParsing="false" onAction="#createBall2" text="球体" />
-                  <MenuItem mnemonicParsing="false" onAction="#createCylinder2" text="圆柱体" />
-                  <MenuItem mnemonicParsing="false" onAction="#createPyramid2" text="四棱锥" />
-            </items>
-          </Menu>
-          <Menu fx:id="clearMenu" mnemonicParsing="false" text="清除画板">
-            <items>
-              <MenuItem fx:id="clearButton" mnemonicParsing="false" onAction="#cleanAll" text="清除" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <bottom>
-      <AnchorPane fx:id="bottomPane" prefHeight="37.0" prefWidth="806.0" style="-fx-background-color: #C1FFC1#C1FFC1;" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="bottomLabel" layoutX="703.0" layoutY="15.0" prefHeight="17.0" prefWidth="99.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="4.0" />
-         </children>
-      </AnchorPane>
-   </bottom>
-   <center>
-      <AnchorPane fx:id="centerPane" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFAFA#FFFAFA00#F0FFFF#F0FFFF00;" BorderPane.alignment="CENTER" />
-   </center>
-   <left>
-      <ScrollPane prefHeight="654.0" prefWidth="168.0" style="-fx-background-color: #C6E2FF#C6E2FF;" BorderPane.alignment="CENTER">
-         <content>
-            <AnchorPane fx:id="leftPane" prefHeight="633.0" prefWidth="168.0">
-               <children>
-                  <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0" />
-                  <AnchorPane fx:id="lightPane" layoutX="-1.0" layoutY="306.0" prefHeight="225.0" prefWidth="168.0" />
-                  <JFXButton fx:id="cubeButton" buttonType="RAISED" layoutX="10.0" layoutY="14.0" onAction="#createCube" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cube.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="cuboidButton" buttonType="RAISED" layoutX="74.0" layoutY="14.0" onAction="#createCuboid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cuboid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="ballButton" buttonType="RAISED" layoutX="10.0" layoutY="73.0" onAction="#createBall" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/ball.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="cylinderButton" buttonType="RAISED" layoutX="74.0" layoutY="73.0" onAction="#createCylinder" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/cylinder.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="pyramidButton" buttonType="RAISED" layoutX="10.0" layoutY="135.0" onAction="#createPyramid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/pyramid.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="chooseButton" buttonType="RAISED" layoutX="74.0" layoutY="135.0" onAction="#chooseNode" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0ee849">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/chooser.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXColorPicker fx:id="colorPicker" layoutX="27.0" layoutY="197.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXColorPicker>
-                  <Label layoutX="18.0" layoutY="267.0" text="设置光源" />
-                  <JFXToggleButton fx:id="lightBtn" layoutX="74.0" layoutY="246.0" onAction="#lightOnOff" prefHeight="60.0" prefWidth="74.0" />
-                  <AnchorPane fx:id="grainPane" layoutX="1.0" layoutY="533.0" prefHeight="74.0" prefWidth="153.0" />
-                  <Separator layoutX="-44.0" layoutY="529.0" prefHeight="4.0" prefWidth="211.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
-   </left>
-   <right>
-      <ScrollPane prefHeight="653.0" prefWidth="180.0" BorderPane.alignment="CENTER">
-         <content>
-            <AnchorPane fx:id="toolPane" prefHeight="633.0" prefWidth="117.0" />
-         </content>
-      </ScrollPane>
-   </right>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0"
+            prefWidth="806.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.ahnu.controller.MainController">
+    <top>
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="新建">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#createCube2" text="正方体"/>
+                        <MenuItem mnemonicParsing="false" onAction="#createCuboid2" text="长方体"/>
+                        <MenuItem mnemonicParsing="false" onAction="#createBall2" text="球体"/>
+                        <MenuItem mnemonicParsing="false" onAction="#createCylinder2" text="圆柱体"/>
+                        <MenuItem mnemonicParsing="false" onAction="#createPyramid2" text="四棱锥"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="clearMenu" mnemonicParsing="false" text="清除画板">
+                    <items>
+                        <MenuItem fx:id="clearButton" mnemonicParsing="false" onAction="#cleanAll" text="清除"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <AnchorPane fx:id="bottomPane" prefHeight="37.0" prefWidth="806.0" style="-fx-background-color: #C1FFC1#C1FFC1;"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="bottomLabel" layoutX="703.0" layoutY="15.0" prefHeight="17.0" prefWidth="99.0"
+                       AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="4.0"/>
+            </children>
+        </AnchorPane>
+    </bottom>
+    <center>
+        <AnchorPane fx:id="centerPane" onMouseExited="#setMouseExit" onMouseMoved="#setMouseLocation" prefHeight="200.0"
+                    prefWidth="200.0" style="-fx-background-color: #FFFAFA#FFFAFA00#F0FFFF#F0FFFF00;"
+                    BorderPane.alignment="CENTER"/>
+    </center>
+    <left>
+        <ScrollPane prefHeight="654.0" prefWidth="168.0" style="-fx-background-color: #C6E2FF#C6E2FF;"
+                    BorderPane.alignment="CENTER">
+            <content>
+                <AnchorPane fx:id="leftPane" prefHeight="633.0" prefWidth="168.0">
+                    <children>
+                        <Separator layoutY="250.0" prefHeight="0.0" prefWidth="168.0"/>
+                        <AnchorPane fx:id="lightPane" layoutX="-1.0" layoutY="306.0" prefHeight="225.0"
+                                    prefWidth="168.0"/>
+                        <JFXButton fx:id="cubeButton" buttonType="RAISED" layoutX="10.0" layoutY="14.0"
+                                   onAction="#createCube" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/cube.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="cuboidButton" buttonType="RAISED" layoutX="74.0" layoutY="14.0"
+                                   onAction="#createCuboid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/cuboid.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="ballButton" buttonType="RAISED" layoutX="10.0" layoutY="73.0"
+                                   onAction="#createBall" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/ball.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="cylinderButton" buttonType="RAISED" layoutX="74.0" layoutY="73.0"
+                                   onAction="#createCylinder" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/cylinder.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="pyramidButton" buttonType="RAISED" layoutX="10.0" layoutY="135.0"
+                                   onAction="#createPyramid" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0dc2ea">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/pyramid.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="chooseButton" buttonType="RAISED" layoutX="74.0" layoutY="135.0"
+                                   onAction="#chooseNode" prefHeight="45.0" prefWidth="50.0" ripplerFill="#0ee849">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../image/chooser.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXColorPicker fx:id="colorPicker" layoutX="27.0" layoutY="197.0">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXColorPicker>
+                        <Label layoutX="18.0" layoutY="267.0" text="设置光源"/>
+                        <JFXToggleButton fx:id="lightBtn" layoutX="74.0" layoutY="246.0" onAction="#lightOnOff"
+                                         prefHeight="60.0" prefWidth="74.0"/>
+                        <AnchorPane fx:id="grainPane" layoutX="1.0" layoutY="533.0" prefHeight="74.0"
+                                    prefWidth="153.0"/>
+                        <Separator layoutX="-44.0" layoutY="529.0" prefHeight="4.0" prefWidth="211.0"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </left>
+    <right>
+        <ScrollPane prefHeight="653.0" prefWidth="180.0" BorderPane.alignment="CENTER">
+            <content>
+                <AnchorPane fx:id="toolPane" prefHeight="633.0" prefWidth="117.0"/>
+            </content>
+        </ScrollPane>
+    </right>
 </BorderPane>

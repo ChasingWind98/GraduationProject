@@ -37,9 +37,6 @@ public class LightController {
     private Color color;
 
 
-
-
-
     public void onOffLight(Pane pane) {
         ambientLightBtn.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -98,7 +95,6 @@ public class LightController {
                     DragAndChangeUtil.draggable(jfxBtn);
 
 
-
                     jfxBtn.setOnMousePressed(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -127,12 +123,11 @@ public class LightController {
     /**
      * 关闭所有的光源效果
      */
-    public void closeAllLight(Pane pane){
+    public void closeAllLight(Pane pane) {
 
-        pane.getChildren().removeAll(pointLight,jfxBtn);
+        pane.getChildren().removeAll(pointLight, jfxBtn);
 
     }
-
 
 
 }

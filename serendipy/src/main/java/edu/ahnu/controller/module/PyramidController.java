@@ -53,10 +53,7 @@ public class PyramidController {
     private JFXTextField layoutYText;
 
 
-
-
-
-    public void drawPyramid(Pane pane, ColorPicker colorPicker){
+    public void drawPyramid(Pane pane, ColorPicker colorPicker) {
         pane.setOnMousePressed(event -> {
 
             flag = 1;
@@ -78,7 +75,6 @@ public class PyramidController {
 
             endLengthX = event.getX() - startX;
             endLengthY = event.getY() - startY;
-
 
 
             pyramid = CustomTriangleMesh.generatePyramid(endLengthX, endLengthY);
@@ -113,12 +109,12 @@ public class PyramidController {
     }
 
 
-    public void createPyramid2(Pane pane, ColorPicker colorPicker){
+    public void createPyramid2(Pane pane, ColorPicker colorPicker) {
 
         sideText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     sideText.setText(oldValue);
                 }
             }
@@ -127,7 +123,7 @@ public class PyramidController {
         heightText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     heightText.setText(oldValue);
                 }
             }
@@ -136,7 +132,7 @@ public class PyramidController {
         layoutXText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutXText.setText(oldValue);
                 }
             }
@@ -146,24 +142,23 @@ public class PyramidController {
         layoutYText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutYText.setText(oldValue);
                 }
             }
         });
 
 
-
         createBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //不合法的数据
-                if (sideText.getText().isEmpty() || heightText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()){
+                if (sideText.getText().isEmpty() || heightText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
                     alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
                     alert.show();
-                }else {
+                } else {
                     double side = Double.parseDouble(sideText.getText());
                     double height = Double.parseDouble(heightText.getText());
                     double layX = Double.parseDouble(layoutXText.getText());

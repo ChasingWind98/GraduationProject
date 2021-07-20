@@ -54,7 +54,7 @@ public class CylinderController {
     private JFXButton createBtn;
 
 
-    public void drawCylinder(final Pane pane, ColorPicker colorPicker){
+    public void drawCylinder(final Pane pane, ColorPicker colorPicker) {
         pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -83,7 +83,7 @@ public class CylinderController {
                 endLengthX = event.getX() - startX;
                 endLengthY = event.getY() - startY;
 
-                double radius = endLengthX /2;
+                double radius = endLengthX / 2;
 
                /* if (radius <= 0 || endLengthY <= 0){
                     radiusText.setText("0.0");
@@ -92,7 +92,6 @@ public class CylinderController {
                     radiusText.setText(String.format("%.1f", radius));
                     heightText.setText(String.format("%.1f", endLengthY));
                 }*/
-
 
 
                 cylinder = new Cylinder(radius, endLengthY);
@@ -122,11 +121,11 @@ public class CylinderController {
         });
     }
 
-    public void createCylinder2(Pane pane, ColorPicker colorPicker){
+    public void createCylinder2(Pane pane, ColorPicker colorPicker) {
         radiusText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     radiusText.setText(oldValue);
                 }
             }
@@ -135,7 +134,7 @@ public class CylinderController {
         heightText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     heightText.setText(oldValue);
                 }
             }
@@ -144,7 +143,7 @@ public class CylinderController {
         layoutXText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutXText.setText(oldValue);
                 }
             }
@@ -154,24 +153,23 @@ public class CylinderController {
         layoutYText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (RegexUtil.judgeNum(newValue)){
+                if (RegexUtil.judgeNum(newValue)) {
                     layoutYText.setText(oldValue);
                 }
             }
         });
 
 
-
         createBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //不合法的数据
-                if (radiusText.getText().isEmpty() || heightText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()){
+                if (radiusText.getText().isEmpty() || heightText.getText().isEmpty() || layoutXText.getText().isEmpty() || layoutYText.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("数据填写不完整哦 \n" + "✧ʕ̢̣̣̣̣̩̩̩̩·͡˔·ོɁ̡̣̣̣̣̩̩̩̩✧");
                     alert.setGraphic(new ImageView(ImagePathUtil.getImagePath()));
                     alert.show();
-                }else {
+                } else {
                     double radius = Double.parseDouble(radiusText.getText());
                     double height = Double.parseDouble(heightText.getText());
                     double layX = Double.parseDouble(layoutXText.getText());

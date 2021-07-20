@@ -8,7 +8,7 @@ import javafx.scene.shape.TriangleMesh;
  */
 public class CustomTriangleMesh {
     public static MeshView generatePyramid(double side, double height) {
-
+        //顶点坐标
         float[] points = new float[]{
                 0, 0, 0,                                        // Point 0 - Top
                 0, (float) height, (float) (-side / 2),         // Point 1 - Front
@@ -16,12 +16,11 @@ public class CustomTriangleMesh {
                 (float) (side / 2), (float) height, 0,            // Point 3 - Back
                 0, (float) height, (float) (side / 2)           // Point 4 - Right
         };
-
+        //贴图坐标的数目
         float[] texCoords = new float[]{
                 0, 0,
-
         };
-
+        //3D物体的面
         int[] faces = new int[]{
                 0, 0, 2, 0, 1, 0,          // Front left face
                 0, 0, 1, 0, 3, 0,          // Front right face
@@ -30,13 +29,10 @@ public class CustomTriangleMesh {
                 4, 0, 1, 0, 2, 0,          // Bottom rear face
                 4, 0, 3, 0, 1, 0           // Bottom front face
         };
-
-
         TriangleMesh tm = new TriangleMesh();
         tm.getPoints().addAll(points);
         tm.getTexCoords().addAll(texCoords);
         tm.getFaces().addAll(faces);
-
 
         MeshView mv = new MeshView(tm);
 

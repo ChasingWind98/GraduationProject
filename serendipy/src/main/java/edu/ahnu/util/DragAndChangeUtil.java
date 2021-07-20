@@ -121,9 +121,6 @@ public class DragAndChangeUtil {
         });
 
 
-
-
-
     }
 
 
@@ -136,7 +133,7 @@ public class DragAndChangeUtil {
             @Override
             public void handle(MouseEvent event) {
 
-                if (event.getClickCount() == 1){
+                if (event.getClickCount() == 1) {
 
                     toolPane.getChildren().clear();
                     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -176,7 +173,7 @@ public class DragAndChangeUtil {
                 }
 
                 //三击 删除节点
-                if (event.getClickCount() == 3){
+                if (event.getClickCount() == 3) {
                     centerPane.getChildren().remove(node);
                 }
 
@@ -185,7 +182,6 @@ public class DragAndChangeUtil {
 
 
     }
-
 
 
 }
